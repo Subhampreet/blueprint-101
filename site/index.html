@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blueprint 101</title>
+  <meta name="description" content="System design notes, hand-drawn diagrams, case studies, from-scratch builds and interactive labs for product company interviews.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // apply the saved theme before first paint to avoid a flash
+    try { var t = localStorage.getItem("bp-theme"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Toggle navigation">&#9776;</button>
+    <a class="brand" href="#/">
+      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="6" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M9 21 L14 11 L18 17 L23 9" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Blueprint 101</span>
+    </a>
+    <nav class="top-links" aria-label="Primary">
+      <a href="#/">Overview</a>
+      <a href="#/roadmap">Roadmap</a>
+      <a href="#/labs">Labs</a>
+      <a href="#/flashcards">Flashcards</a>
+      <a href="#/diagrams">Diagrams</a>
+    </nav>
+    <button class="search-trigger" id="searchBtn" aria-label="Search notes">
+      <span>Search notes</span><kbd>/</kbd>
+    </button>
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">&#9680;</button>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar" aria-label="Notes">
+      <div class="progress-card" id="progressCard"></div>
+      <nav id="nav"></nav>
+    </aside>
+    <main id="main" tabindex="-1"></main>
+  </div>
+
+  <div class="search-modal" id="searchModal" hidden>
+    <div class="search-box" role="dialog" aria-modal="true" aria-label="Search">
+      <input id="searchInput" type="search" placeholder="Search 70+ notes: try 'idempotency', 'kafka', 'quorum'..." autocomplete="off">
+      <div id="searchResults" class="search-results"></div>
+      <div class="search-hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</div>
+    </div>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="markdown.js"></script>
+  <script src="labs.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
