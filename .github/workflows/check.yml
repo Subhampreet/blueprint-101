@@ -1,0 +1,25 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run build self-tests
+        run: for f in builds/*.py; do python "$f"; done
+      - name: Diagrams, code sync and site content are up to date
+        run: |
+          python tools/diagrams/build.py
+          python tools/sync_builds.py
+          python tools/build_site.py
+          git diff --exit-code -- notes site/content.js README.md assets
+      - name: Lint notes
+        run: python tools/check_notes.py

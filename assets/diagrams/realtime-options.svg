@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="23.8 -12 1095.7 491.9" width="1096" height="492" font-family="Virgil, Excalifont, 'Comic Sans MS', 'Chalkboard SE', 'Segoe Print', 'Bradley Hand', cursive">
+<rect x="23.8" y="-12" width="1095.7" height="491.9" rx="14" fill="#ffffff"/>
+<text font-size="22" fill="#1e1e1e" text-anchor="start"><tspan x="49.8" y="22">Polling vs long polling vs SSE vs WebSocket</tspan></text>
+<path d="M50.5 32.7 Q247 33 515.8 30.4" stroke="#e8590c" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+<path d="M69.4 104.6 Q70.9 296.8 68.8 424.9" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M228.8 106 Q232.4 288.6 230.9 424" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M348.8 105.7 Q348 268.5 351.4 424.5" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M509.5 105.5 Q511.7 247 509.2 423" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M629.3 107.3 Q631.2 267.3 630.7 422.4" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M789.8 106.9 Q790.6 262.3 789.7 425" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M909.6 106.2 Q911.4 254.1 910.3 424.1" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M1070.2 104.5 Q1069.3 227.8 1069.6 423.9" stroke="#868e96" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<path d="M75.5 130.5 Q155.9 128.1 222.8 129.2 M75.2 130.3 Q164.1 131.4 222.9 129.4" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M212.8 124.7 Q216.9 126.8 224.1 130.3 M212.6 136.1 Q218.7 132.5 224.2 130.3" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M225.1 164.4 Q148.5 162.7 75 164.9" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M87.8 170.8 Q81.3 166.9 76.2 164.9 M88.1 158.9 Q81.6 162.7 76.3 165.2" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M76.9 229.9 Q165.1 229.6 223.9 228.8 M76.4 230.6 Q158.4 231.6 225.3 228.8" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M212.7 224.3 Q217.7 227 223.9 229.7 M212.7 235.9 Q219.3 233 224.3 229.9" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M224.1 264.3 Q128.5 266 76.4 266.1" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M87.5 271 Q82 268.6 76.4 265.2 M88 259.1 Q82.1 262.7 76.3 265.1" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M75.6 330.1 Q138.4 328 223.1 330.1 M76.1 329.9 Q148.4 328.4 223.9 331" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M212.3 324.5 Q218 326.9 224.2 330 M211.8 336.1 Q216.7 333.2 223.5 329.9" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M224.9 365.2 Q163.3 365.8 75.5 364.9" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M87.3 370.4 Q82 367.4 75.8 364.8 M88.1 359.3 Q81.4 362.3 75.9 365" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M356.3 129.2 Q408.8 129.2 503.5 129.7 M357.1 129.4 Q442.6 131.5 504.1 130.3" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M491.8 124.1 Q497.9 127 503.6 129.8 M492.3 135.7 Q497.7 133 504.4 129.9" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M504.4 231.2 Q426.7 228.8 355 229.2" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M367.3 235.5 Q360 232.1 355.9 230 M368.1 224.7 Q361.4 227.5 355.9 229.6" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M357 269.5 Q441.1 269.4 502.9 270.6 M355.9 268.7 Q435.6 268.2 503 269.7" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M492.1 264.7 Q498.8 268.3 504.1 270 M492.1 275.5 Q497.2 272.9 503.6 269.9" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M503.9 370.5 Q416.3 368.4 356.9 369" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M367.3 375.3 Q359.9 372.3 355.7 370 M367.7 364.6 Q361.2 367.3 355.7 369.5" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M636.2 131.2 Q730.8 129 784.8 130.1 M636.2 130.4 Q699.9 129.4 783.3 131" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M772.5 124.3 Q778.8 126.8 784.3 130.3 M772.4 135.4 Q779.7 132.6 784.3 129.9" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M782.7 200 Q729.7 197.8 635.1 198.9" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M647.8 206 Q642.2 202.7 635.7 200.2 M647.6 194.7 Q642.3 197.5 636 200.4" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M785.2 260 Q719.6 259.2 635 259.9" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M648.2 265.8 Q641.7 262.8 635.6 260 M647.8 254.2 Q642.7 257 636.2 259.6" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M784.4 318.9 Q706.4 318.7 637 320.2" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M647.8 325.4 Q642.3 323.7 635.7 320.2 M647.4 314.4 Q641.9 317.6 636.3 320.2" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M783 379.8 Q724.8 379.9 636 380.8" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M647.4 385.6 Q643 383.2 635.7 380 M647.9 374.1 Q641.1 377.8 635.8 379.8" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M915 128.9 Q988.2 132.1 1064.7 130.9 M915.5 130.4 Q979.5 132.6 1065.2 130.5" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M1052.4 124.1 Q1059.8 127 1064.1 129.8 M1052.5 135.4 Q1059.5 132.8 1064.3 130.4" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M1064.3 170.9 Q992.2 170.2 916.7 169.8" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M928 175.8 Q922.5 173.1 916.1 169.7 M927.4 164.2 Q922.6 166.4 915.6 169.7" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M915.5 239.6 Q992.3 239.6 1064.7 238.8 M917 239.9 Q1005.2 237.6 1065 239.6" stroke="#1971c2" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M1052.6 234.7 Q1057.3 236.4 1064.2 240.4 M1052.1 245.6 Q1057 242.8 1064.1 240" stroke="#1971c2" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M1065.1 291.2 Q993.5 291.1 915.2 289.7" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M927.9 296 Q920.1 292.4 915.9 290.2 M928.2 284.1 Q921.6 286.7 915.7 290.3" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M1064.2 341 Q1001.1 339.5 917 340.7" stroke="#2f9e44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/><path d="M927.8 345.4 Q922.1 343.4 916.3 340.1 M927.3 334.4 Q923.2 336.1 916 339.9" stroke="#2f9e44" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M914.8 390.9 Q991.3 390.6 1064.2 389 M915.1 390.9 Q1011.8 392.9 1064.1 391.1" stroke="#1971c2" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M1052.6 384 Q1059.6 387.3 1063.9 390.3 M1052.7 395.3 Q1057.6 393.6 1064.1 390.2" stroke="#1971c2" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<text font-size="18" fill="#1e1e1e" text-anchor="middle"><tspan x="150" y="78">Short polling</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="431"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="431"></tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="70" y="448">client</tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="230" y="448">server</tspan></text>
+<text font-size="18" fill="#1e1e1e" text-anchor="middle"><tspan x="430" y="78">Long polling</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="350" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="350" y="431"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="510" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="510" y="431"></tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="350" y="448">client</tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="510" y="448">server</tspan></text>
+<text font-size="18" fill="#1e1e1e" text-anchor="middle"><tspan x="710" y="78">SSE</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="431"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="431"></tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="630" y="448">client</tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="790" y="448">server</tspan></text>
+<text font-size="18" fill="#1e1e1e" text-anchor="middle"><tspan x="990" y="78">WebSocket</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="431"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="101"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="431"></tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="910" y="448">client</tspan></text>
+<text font-size="13" fill="#495057" text-anchor="middle"><tspan x="1070" y="448">server</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="166"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="166"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="231"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="231"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="266"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="266"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="331"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="331"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="230" y="366"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="70" y="366"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="350" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="510" y="131"></tspan></text>
+<text font-size="13" fill="#868e96" text-anchor="middle"><tspan x="430" y="188">held open...</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="510" y="231"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="350" y="231"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="350" y="271"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="510" y="271"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="510" y="371"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="350" y="371"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="201"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="201"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="261"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="261"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="321"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="321"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="790" y="381"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="630" y="381"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="131"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="171"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="171"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="241"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="241"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="291"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="291"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="341"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="341"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="910" y="391"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="1070" y="391"></tspan></text>
+<rect x="107.3" y="118.6" width="85.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="150" y="135.2">any news?</tspan></text>
+<rect x="136.8" y="153.6" width="26.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="150" y="170.2">no</tspan></text>
+<rect x="107.3" y="218.6" width="85.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="150" y="235.2">any news?</tspan></text>
+<rect x="136.8" y="253.6" width="26.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="150" y="270.2">no</tspan></text>
+<rect x="107.3" y="318.6" width="85.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="150" y="335.2">any news?</tspan></text>
+<rect x="130.4" y="353.6" width="39.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="150" y="370.2">yes!</tspan></text>
+<rect x="387.3" y="118.6" width="85.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="430" y="135.2">any news?</tspan></text>
+<rect x="404.4" y="218.6" width="51.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="430" y="235.2">event</tspan></text>
+<rect x="387.3" y="258.6" width="85.5" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="430" y="275.2">any news?</tspan></text>
+<rect x="404.4" y="358.6" width="51.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="430" y="375.2">event</tspan></text>
+<rect x="656.5" y="118.6" width="106.9" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="710" y="135.2">GET /stream</tspan></text>
+<rect x="684.4" y="188.6" width="51.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="710" y="205.2">event</tspan></text>
+<rect x="684.4" y="248.6" width="51.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="710" y="265.2">event</tspan></text>
+<rect x="684.4" y="308.6" width="51.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="710" y="325.2">event</tspan></text>
+<rect x="684.4" y="368.6" width="51.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="710" y="385.2">event</tspan></text>
+<rect x="933" y="118.6" width="113.9" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="990" y="135.2">HTTP Upgrade</tspan></text>
+<rect x="933.7" y="158.6" width="112.6" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#495057" text-anchor="middle"><tspan x="990" y="175.2">101 Switching</tspan></text>
+<rect x="970.4" y="228.6" width="39.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#1971c2" text-anchor="middle"><tspan x="990" y="245.2">msg</tspan></text>
+<rect x="970.4" y="278.6" width="39.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="990" y="295.2">msg</tspan></text>
+<rect x="970.4" y="328.6" width="39.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#2f9e44" text-anchor="middle"><tspan x="990" y="345.2">msg</tspan></text>
+<rect x="970.4" y="378.6" width="39.2" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#1971c2" text-anchor="middle"><tspan x="990" y="395.2">msg</tspan></text>
+</svg>
