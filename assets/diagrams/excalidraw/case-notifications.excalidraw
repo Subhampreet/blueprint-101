@@ -80,8 +80,8 @@
   {
    "id": "src-label",
    "type": "text",
-   "x": -5.534999999999997,
-   "y": 159.875,
+   "x": -5.53,
+   "y": 159.88,
    "width": 211.07,
    "height": 74.25,
    "angle": 0,
@@ -256,7 +256,7 @@
   {
    "id": "pref-label",
    "type": "text",
-   "x": 229.95999999999998,
+   "x": 229.96,
    "y": 37.25,
    "width": 210.08,
    "height": 49.5,
@@ -330,7 +330,7 @@
   {
    "id": "tmpl-label",
    "type": "text",
-   "x": 498.375,
+   "x": 498.38,
    "y": 37.25,
    "width": 133.25,
    "height": 49.5,
@@ -404,7 +404,7 @@
   {
    "id": "rl-label",
    "type": "text",
-   "x": 241.445,
+   "x": 241.44,
    "y": 307.25,
    "width": 187.11,
    "height": 49.5,
@@ -712,7 +712,7 @@
   {
    "id": "q1-label",
    "type": "text",
-   "x": 573.965,
+   "x": 573.97,
    "y": 217.69,
    "width": 42.07,
    "height": 20.62,
@@ -790,7 +790,7 @@
   {
    "id": "w1-label",
    "type": "text",
-   "x": 737.005,
+   "x": 737.0,
    "y": 217.69,
    "width": 115.99,
    "height": 20.62,
@@ -942,7 +942,7 @@
   {
    "id": "q2-label",
    "type": "text",
-   "x": 578.915,
+   "x": 578.91,
    "y": 297.69,
    "width": 32.17,
    "height": 20.62,
@@ -1020,7 +1020,7 @@
   {
    "id": "w2-label",
    "type": "text",
-   "x": 741.955,
+   "x": 741.96,
    "y": 297.69,
    "width": 106.09,
    "height": 20.62,
@@ -1509,8 +1509,8 @@
   {
    "id": "log-label",
    "type": "text",
-   "x": 943.435,
-   "y": 456.625,
+   "x": 943.43,
+   "y": 456.62,
    "width": 113.13,
    "height": 46.75,
    "angle": 0,
@@ -1533,7 +1533,7 @@
    "link": null,
    "locked": false,
    "text": "Delivery log\nsent/opened",
-   "fontSize": 18.700000000000003,
+   "fontSize": 18.7,
    "fontFamily": 1,
    "textAlign": "center",
    "verticalAlign": "middle",

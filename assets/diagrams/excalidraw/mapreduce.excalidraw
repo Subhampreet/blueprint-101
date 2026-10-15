@@ -88,7 +88,7 @@
   {
    "id": "in-label",
    "type": "text",
-   "x": 11.444999999999993,
+   "x": 11.44,
    "y": 180.25,
    "width": 167.11,
    "height": 49.5,
@@ -170,7 +170,7 @@
   {
    "id": "m0-label",
    "type": "text",
-   "x": 232.135,
+   "x": 232.13,
    "y": 67.25,
    "width": 145.73,
    "height": 49.5,
@@ -252,7 +252,7 @@
   {
    "id": "m1-label",
    "type": "text",
-   "x": 232.135,
+   "x": 232.13,
    "y": 177.25,
    "width": 145.73,
    "height": 49.5,
@@ -334,7 +334,7 @@
   {
    "id": "m2-label",
    "type": "text",
-   "x": 232.135,
+   "x": 232.13,
    "y": 287.25,
    "width": 145.73,
    "height": 49.5,
@@ -459,7 +459,7 @@
    "link": null,
    "locked": false,
    "text": "partition by\nhash(word) % R,\nsort by key",
-   "fontSize": 15.400000000000002,
+   "fontSize": 15.4,
    "fontFamily": 1,
    "textAlign": "left",
    "verticalAlign": "top",

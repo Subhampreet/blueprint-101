@@ -748,7 +748,20 @@ class Diagram:
         src = os.path.join(out_dir, "excalidraw")
         os.makedirs(src, exist_ok=True)
         with open(os.path.join(src, self.name + ".excalidraw"), "w") as f:
-            json.dump(self.to_excalidraw(), f, indent=1)
+            json.dump(_round_floats(self.to_excalidraw()), f, indent=1)
+
+
+def _round_floats(obj, ndigits=2):
+    """Round every float so output is byte-identical across Python versions and platforms
+    (the last digit of float arithmetic can differ between 3.9 on macOS and 3.12 on Linux)."""
+    if isinstance(obj, float):
+        r = round(obj, ndigits)
+        return 0.0 if r == 0 else r
+    if isinstance(obj, dict):
+        return {k: _round_floats(v, ndigits) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_round_floats(v, ndigits) for v in obj]
+    return obj
 
 
 def _esc(s):

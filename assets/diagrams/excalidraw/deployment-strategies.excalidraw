@@ -287,7 +287,7 @@
   {
    "id": "blue-label",
    "type": "text",
-   "x": 69.28999999999999,
+   "x": 69.29,
    "y": 238.0,
    "width": 61.42,
    "height": 44.0,
@@ -915,7 +915,7 @@
   {
    "id": "r0-label",
    "type": "text",
-   "x": 832.735,
+   "x": 832.74,
    "y": 128.0,
    "width": 44.53,
    "height": 44.0,
@@ -985,7 +985,7 @@
   {
    "id": "r1-label",
    "type": "text",
-   "x": 982.735,
+   "x": 982.74,
    "y": 128.0,
    "width": 44.53,
    "height": 44.0,
@@ -1055,7 +1055,7 @@
   {
    "id": "r2-label",
    "type": "text",
-   "x": 832.735,
+   "x": 832.74,
    "y": 218.0,
    "width": 44.53,
    "height": 44.0,
@@ -1125,7 +1125,7 @@
   {
    "id": "r3-label",
    "type": "text",
-   "x": 982.735,
+   "x": 982.74,
    "y": 218.0,
    "width": 44.53,
    "height": 44.0,
@@ -1185,7 +1185,7 @@
    "link": null,
    "locked": false,
    "text": "replace a batch at a time\n(maxSurge / maxUnavailable)",
-   "fontSize": 15.400000000000002,
+   "fontSize": 15.4,
    "fontFamily": 1,
    "textAlign": "left",
    "verticalAlign": "top",
@@ -1345,7 +1345,7 @@
   {
    "id": "edge-1-label",
    "type": "text",
-   "x": 114.62500000000001,
+   "x": 114.63,
    "y": 184.69,
    "width": 64.35,
    "height": 20.62,
@@ -1437,7 +1437,7 @@
   {
    "id": "edge-2-label",
    "type": "text",
-   "x": 503.18499999999995,
+   "x": 503.18,
    "y": 184.69,
    "width": 27.23,
    "height": 20.62,
@@ -1529,7 +1529,7 @@
   {
    "id": "edge-3-label",
    "type": "text",
-   "x": 594.125,
+   "x": 594.12,
    "y": 184.69,
    "width": 18.15,
    "height": 20.62,
