@@ -20,6 +20,6 @@ jobs:
           python tools/diagrams/build.py
           python tools/sync_builds.py
           python tools/build_site.py
-          git diff --exit-code -- notes site/content.js README.md assets
+          git diff --exit-code -- notes site/content.js site/assets README.md assets
       - name: Lint notes
         run: python tools/check_notes.py

@@ -144,8 +144,8 @@
   {
    "id": "sub-label",
    "type": "text",
-   "x": 39.165000000000006,
-   "y": 182.625,
+   "x": 39.17,
+   "y": 182.62,
    "width": 131.67,
    "height": 24.75,
    "angle": 0,
@@ -234,7 +234,7 @@
   {
    "id": "q-label",
    "type": "text",
-   "x": 256.265,
+   "x": 256.26,
    "y": 183.31,
    "width": 197.47,
    "height": 23.38,
@@ -258,7 +258,7 @@
    "link": null,
    "locked": false,
    "text": "task queue (bounded)",
-   "fontSize": 18.700000000000003,
+   "fontSize": 18.7,
    "fontFamily": 1,
    "textAlign": "center",
    "verticalAlign": "middle",

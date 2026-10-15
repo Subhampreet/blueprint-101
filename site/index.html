@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Blueprint 101</title>
-  <meta name="description" content="System design notes, hand-drawn diagrams, case studies, from-scratch builds and interactive labs for product company interviews.">
+  <meta name="description" content="The one-stop page to prepare for system design interviews: notes, hand-drawn diagrams, case studies, from-scratch builds and interactive labs.">
+  <meta name="theme-color" content="#070708">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23eafe7c'/%3E%3Cpath d='M8 21l5-9 4 6 7-10' fill='none' stroke='%230a0a0b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
     // apply the saved theme before first paint to avoid a flash
@@ -17,37 +19,40 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar">
-    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Toggle navigation">&#9776;</button>
-    <a class="brand" href="#/">
-      <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="6" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M9 21 L14 11 L18 17 L23 9" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>Blueprint 101</span>
-    </a>
-    <nav class="top-links" aria-label="Primary">
-      <a href="#/">Overview</a>
-      <a href="#/roadmap">Roadmap</a>
-      <a href="#/labs">Labs</a>
-      <a href="#/flashcards">Flashcards</a>
-      <a href="#/diagrams">Diagrams</a>
-    </nav>
-    <button class="search-trigger" id="searchBtn" aria-label="Search notes">
-      <span>Search notes</span><kbd>/</kbd>
-    </button>
-    <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">&#9680;</button>
+    <div class="topbar-inner">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Toggle navigation"></button>
+      <a class="brand" href="#/" aria-label="Blueprint 101 home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 21l5-9 4 6 7-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-name">Blueprint<span>101</span></span>
+      </a>
+      <nav class="top-links" aria-label="Primary">
+        <a href="#/" data-match="">Get started</a>
+        <a href="#/section/09-case-studies" data-match="section/09">Case studies</a>
+        <a href="#/plans" data-match="plan">Study plans</a>
+        <a href="#/labs" data-match="lab">Labs</a>
+        <a href="#/flashcards" data-match="flashcards">Flashcards</a>
+      </nav>
+      <div class="top-right">
+        <button class="search-trigger" id="searchBtn" aria-label="Search notes">
+          <span class="ic" data-icon="search"></span><span class="label">Search</span><kbd>/</kbd>
+        </button>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode"></button>
+        <a class="icon-btn" id="ghLink" href="https://github.com/Subhampreet/blueprint-101" target="_blank" rel="noopener" aria-label="GitHub repository"></a>
+      </div>
+    </div>
   </header>
 
   <div class="layout">
-    <aside class="sidebar" id="sidebar" aria-label="Notes">
-      <div class="progress-card" id="progressCard"></div>
-      <nav id="nav"></nav>
-    </aside>
+    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+    <div class="scrim" id="scrim" hidden></div>
     <main id="main" tabindex="-1"></main>
   </div>
 
   <div class="search-modal" id="searchModal" hidden>
     <div class="search-box" role="dialog" aria-modal="true" aria-label="Search">
-      <input id="searchInput" type="search" placeholder="Search 70+ notes: try 'idempotency', 'kafka', 'quorum'..." autocomplete="off">
+      <div class="search-input"><span class="ic" data-icon="search"></span><input id="searchInput" type="search" placeholder="Search notes: try 'idempotency', 'kafka', 'quorum'" autocomplete="off"><kbd>Esc</kbd></div>
       <div id="searchResults" class="search-results"></div>
-      <div class="search-hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move, <kbd>Enter</kbd> to open, <kbd>Esc</kbd> to close</div>
+      <div class="search-hint"><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move <kbd>Enter</kbd> to open</div>
     </div>
   </div>
 

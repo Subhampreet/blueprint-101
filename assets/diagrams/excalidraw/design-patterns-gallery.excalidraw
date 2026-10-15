@@ -301,7 +301,7 @@
   {
    "id": "a-label",
    "type": "text",
-   "x": 69.875,
+   "x": 69.88,
    "y": 317.69,
    "width": 90.25,
    "height": 20.62,
@@ -596,7 +596,7 @@
   {
    "id": "o1-label",
    "type": "text",
-   "x": 448.53499999999997,
+   "x": 448.53,
    "y": 244.69,
    "width": 72.93,
    "height": 20.62,
@@ -670,7 +670,7 @@
   {
    "id": "o2-label",
    "type": "text",
-   "x": 578.735,
+   "x": 578.74,
    "y": 244.69,
    "width": 112.53,
    "height": 20.62,
@@ -883,7 +883,7 @@
   {
    "id": "d1-label",
    "type": "text",
-   "x": 866.905,
+   "x": 866.9,
    "y": 134.0,
    "width": 126.19,
    "height": 22.0,
@@ -961,7 +961,7 @@
   {
    "id": "d2-label",
    "type": "text",
-   "x": 871.745,
+   "x": 871.75,
    "y": 204.0,
    "width": 116.51,
    "height": 22.0,
@@ -1035,7 +1035,7 @@
   {
    "id": "d3-label",
    "type": "text",
-   "x": 884.065,
+   "x": 884.07,
    "y": 274.0,
    "width": 91.87,
    "height": 22.0,
@@ -1095,7 +1095,7 @@
    "link": null,
    "locked": false,
    "text": "same interface, behaviour\nadded layer by layer",
-   "fontSize": 15.400000000000002,
+   "fontSize": 15.4,
    "fontFamily": 1,
    "textAlign": "left",
    "verticalAlign": "top",
@@ -1316,7 +1316,7 @@
   {
    "id": "edge-3-label",
    "type": "text",
-   "x": 496.2885981308411,
+   "x": 496.29,
    "y": 192.69,
    "width": 50.32,
    "height": 20.62,

@@ -90,6 +90,7 @@
 
   var tipEl = null;
   function tip(e, html) {
+    if (html === null && !tipEl) return;
     if (!tipEl) { tipEl = h('<div class="tip" role="status"></div>'); document.body.appendChild(tipEl); }
     if (html === null) { tipEl.style.display = "none"; return; }
     tipEl.innerHTML = html;
