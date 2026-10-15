@@ -2,7 +2,7 @@
 
 System design notes for product company interviews: concepts in depth, hand-drawn (Excalidraw style) architecture diagrams, 15 full case studies, runnable from-scratch builds, and an interactive reader with labs, flashcards and progress tracking.
 
-> Open the interactive reader: `site/index.html` (or the GitHub Pages site once Pages is enabled for this repo).
+> Live reader: [blueprint-101.vercel.app](https://blueprint-101.vercel.app) (or open `site/index.html` locally).
 
 ## What is inside
 
@@ -35,7 +35,9 @@ notes/                 Markdown notes, one folder per section (front matter: tit
 assets/diagrams/       Rendered SVG diagrams used by the notes
 assets/diagrams/excalidraw/   Editable .excalidraw sources for every diagram
 builds/                Runnable from-scratch implementations with self-checks
-site/                  Static interactive reader (no build step needed to view)
+site/                  Static interactive reader (no build step needed to view; deploy this folder)
+site/assets/           Generated copy of assets/diagrams so the deployed site is self-contained
+docs/                  prd.md (what the reader is for) and design.md (the visual system)
 tools/diagrams/        Hand-drawn diagram engine (sketch.py) + diagram definitions (defs/)
 tools/build_site.py    Compiles notes into site/content.js and refreshes the index below
 tools/sync_builds.py   Embeds builds/*.py into the build notes
