@@ -4,6 +4,10 @@ System design notes for product company interviews: concepts in depth, hand-draw
 
 > Live reader: [blueprint-101.vercel.app](https://blueprint-101.vercel.app) (or open `site/index.html` locally).
 
+
+<img width="2940" height="7950" alt="image" src="https://github.com/user-attachments/assets/775fe570-b2eb-41d1-846a-9a3c35b0a44b" />
+
+
 ## What is inside
 
 | | |
