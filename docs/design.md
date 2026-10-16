@@ -79,6 +79,13 @@ The brand lime comes from GreatFrontEnd's `hsl(69 98% 74%)`. Never put white tex
 | Company card | `.card.company` | colored monogram `.logo` (no third-party logos) |
 | Note prose | `.prose` | tables with rounded border, Q&A `<details>` with lime "Q" badge |
 | Diagram figure | `figure.diagram > .frame` | white frame; dark mode inverts the SVG (`--diagram-filter`), like Excalidraw's dark mode |
+| Avatar | `.avatar` (`.lg`, `.xl`) | lime circle with initials; user icon when no name |
+| Welcome strip | `.card.welcome` | name form for new visitors; streak, counts and Continue for returning ones |
+| Local-storage note | `.local-note`, `.callout.local` | lock icon + "saved only in this browser"; shown wherever we collect the name |
+| Dialog | `.modal > .modal-box` | 460px, icon tile, title, text, input, actions right aligned |
+| My notes | `.memo` | textarea under the note body, saves every keystroke, status on the right |
+| Activity heatmap | `.heat` (`.l0` to `.l4`) | 13px day squares, 26 weeks, shades of `--brand-text` so it reads in both themes |
+| Danger button | `.btn.danger` | red text; only for destructive actions behind a confirm |
 | Lab panel / KPI | `.panel`, `.kpi`, `.seg`, `.field` | segmented controls use lime for the selected option |
 
 Icons: 24px viewBox, 1.75 stroke, round caps and joins (Lucide style), defined in `ICONS` in `site/app.js`. Add new icons there; do not import an icon font.
