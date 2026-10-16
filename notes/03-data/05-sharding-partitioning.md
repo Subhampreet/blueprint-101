@@ -8,6 +8,12 @@ time: 35 min
 
 # Sharding and Partitioning
 
+> **TL;DR**
+> - Shard when one node cannot hold the data or the write load; try indexing, caching, replicas and functional splits first.
+> - Range sharding keeps order but creates hot spots; hash sharding spreads load but loses range scans; directories are flexible.
+> - The shard key is the most important decision: high cardinality, even load, and queries that hit one shard.
+> - Create many logical shards up front so you can rebalance by moving them, not by rehashing keys.
+
 When one database node cannot hold the data or handle the write load, split the data across nodes. Each piece is a **partition** (Cassandra, Kafka, DynamoDB), **shard** (MongoDB, Elasticsearch, MySQL), **region** (HBase), **tablet** (Bigtable), or **vnode**. Usually combined with replication: each shard is itself replicated.
 
 ## Do you actually need to shard?

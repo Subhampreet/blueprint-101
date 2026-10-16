@@ -8,6 +8,12 @@ time: 30 min
 
 # Data Warehousing and Analytics
 
+> **TL;DR**
+> - OLTP databases run the business; OLAP warehouses analyze it with columnar storage built for big scans.
+> - Modern pipelines are ELT: load raw data first (often via CDC), transform inside the warehouse with SQL.
+> - Star schemas put measurable facts in the middle and descriptive dimensions around them; SCD Type 2 keeps history.
+> - Lakehouse table formats (Iceberg, Delta) add transactions and schema evolution to cheap object storage.
+
 Product databases are built to serve users. Analytics needs a different system: scanning billions of rows to answer "revenue by region by week for the last 2 years". Running that on your production Postgres hurts users and is slow anyway.
 
 ## OLTP vs OLAP

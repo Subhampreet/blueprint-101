@@ -8,6 +8,11 @@ time: 10 min
 
 # Curated Resources
 
+> **TL;DR**
+> - Start with the three source repositories, then Designing Data-Intensive Applications for depth.
+> - Read the classic papers in order: GFS, MapReduce, Bigtable, Dynamo, Kafka, Raft, Spanner.
+> - Engineering blogs show how real companies solved these problems; practise with mocks and Excalidraw.
+
 ## Source repositories this collection builds on
 
 | Repository | Best for |

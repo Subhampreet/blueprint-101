@@ -8,6 +8,12 @@ time: 40 min
 
 # Design Uber / Lyft
 
+> **TL;DR**
+> - Over a million location pings per second belong in memory (a geo index), not in a relational database.
+> - Find nearby drivers with geohash, quadtree or H3 cells, then rank by ETA, not straight-line distance.
+> - Assigning a driver must be atomic so nobody gets two trips; the trip is a durable state machine.
+> - Surge pricing compares supply and demand per area over short windows.
+
 ## 1. Requirements
 
 **Functional**

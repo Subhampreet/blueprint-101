@@ -8,6 +8,12 @@ time: 30 min
 
 # LLD Walkthrough: Parking Lot
 
+> **TL;DR**
+> - Model entities (lot, floor, spot, vehicle, ticket) and put the parts that change (fees, allocation) behind strategies.
+> - Make "find a spot and occupy it" atomic so two gates never assign the same spot.
+> - Keep slow work like payments outside locks and make it idempotent.
+> - Show extensibility: new spot types or pricing rules are new classes, not edits to tested code.
+
 The most common LLD warm-up. It tests modeling, extensibility and concurrency in 45 minutes.
 
 ## 1. Requirements

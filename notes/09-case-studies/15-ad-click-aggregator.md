@@ -8,6 +8,12 @@ time: 40 min
 
 # Design an Ad Click Aggregator (and Top-K)
 
+> **TL;DR**
+> - Clicks are money: ingest into Kafka, dedupe, aggregate in time windows, and serve from an OLAP store.
+> - Aggregate by event time with watermarks so late or replayed events land in the right window.
+> - Exactly-once results need dedup keys, checkpoints and idempotent sinks, plus a batch recompute for billing.
+> - Top-k uses heaps over partial counts or Count-Min sketches at huge cardinality.
+
 Advertisers pay per click, so click counts are **money**. The system must ingest a firehose of events, aggregate them quickly for dashboards, and be **accurate** for billing.
 
 ## 1. Requirements

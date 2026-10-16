@@ -8,6 +8,11 @@ time: 30 min
 
 # Build: LSM Key-Value Store
 
+> **TL;DR**
+> - Writes go to a write-ahead log and a memtable; full memtables flush to immutable sorted files (SSTables).
+> - Reads check the memtable, then SSTables from newest to oldest; deletes are tombstones.
+> - Compaction merges SSTables and drops overwritten and deleted data; the WAL makes it crash safe.
+
 The storage engine idea behind Cassandra, RocksDB, LevelDB, HBase and Bigtable, in about 150 lines. Theory: [Indexes and Storage Engines](../03-data/02-indexes-storage-engines.md).
 
 ## Components

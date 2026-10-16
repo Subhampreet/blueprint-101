@@ -8,6 +8,11 @@ time: 15 min
 
 # Build: Circuit Breaker
 
+> **TL;DR**
+> - Track outcomes in a rolling window; open when the failure rate crosses a threshold with enough volume.
+> - While open, fail fast or use a fallback; after a cooldown, half-open probes decide whether to close.
+> - Use one breaker per dependency, alongside timeouts and retries.
+
 Theory: [Resilience Patterns](../06-reliability-ops/01-resilience-patterns.md#circuit-breaker).
 
 ## Code

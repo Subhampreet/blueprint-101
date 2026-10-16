@@ -50,7 +50,7 @@
   var SECTION_ICON = {
     "00-start-here": "rocket", "01-fundamentals": "book", "02-building-blocks": "blocks", "03-data": "database",
     "04-networking-apis": "globe", "05-architecture": "layers", "06-reliability-ops": "activity", "07-security": "shield",
-    "08-lld": "code", "09-case-studies": "briefcase", "10-advanced": "cpu", "11-builds": "wrench", "12-resources": "library"
+    "08-lld": "code", "09-case-studies": "briefcase", "10-advanced": "cpu", "11-builds": "wrench", "12-practice": "target", "13-resources": "library"
   };
 
   // ------------------------------------------------------------ storage (never throws)
@@ -172,7 +172,7 @@
         var complete = doneCount(s.notes) === s.notes.length;
         return '<a class="step' + (complete ? " done" : "") + '" href="' + s.href + '"><span class="num">' + (complete ? icon("check") : s.n) + '</span><span class="icon-tile">' + icon(s.icon) +
           "</span><span><h3>" + esc(s.title) + (s.chip ? ' <span class="chip ' + s.chip[0] + '">' + esc(s.chip[1]) + "</span>" : "") + "</h3><p>" + esc(s.desc) + '</p></span><span class="go">' + icon("chevron") + "</span></a>";
-      }).join("") + '<div class="timeline-foot">With extra time, keep going with the focus areas, labs and builds below.</div></div></section>';
+      }).join("") + '<div class="timeline-foot">With extra time, drill the Practice section (estimation, databases, networking, cost) and keep going with the focus areas, labs and builds below.</div></div></section>';
 
     // study plans
     html += '<section class="block"><div class="block-head"><div><h2>Study plans</h2><p>Prepare the best you can within any timeline.</p></div><a class="btn small" href="#/plans">All plans</a></div><div class="grid c3">' +
@@ -186,7 +186,7 @@
 
     // focus areas
     html += '<section class="block"><div class="block-head"><div><h2>Focus areas</h2><p>Deep dive into the topics that system design rounds probe.</p></div></div><div class="grid c3">' +
-      DATA.sections.filter(function (s) { return s.id !== "12-resources"; }).map(function (s) {
+      DATA.sections.filter(function (s) { return s.id !== "13-resources"; }).map(function (s) {
         var d = doneCount(s.notes);
         return '<a class="card focus" href="#/section/' + s.id + '"><span class="icon-tile">' + icon(SECTION_ICON[s.id]) + '</span><span class="body"><h3>' + esc(s.title) + "</h3><p>" + esc(s.blurb) +
           '</p><span class="count">' + d + " / " + s.notes.length + " notes</span>" + progressBar(d, s.notes.length) + "</span></a>";
@@ -197,9 +197,11 @@
       ["#/labs", "flask", "Interactive labs", DATA.labs.length + " simulations", "Move sliders and watch load balancers, caches, quorums and rate limiters react."],
       ["#/flashcards", "cards", "Flashcards", qa + " questions", "Every interview question in the notes as a spaced repetition deck."],
       ["#/section/11-builds", "wrench", "From-scratch builds", SECTION["11-builds"].notes.length + " builds", "Runnable Python for LRU, rate limiters, hash rings, Bloom filters, an LSM store and more."],
-      ["#/diagrams", "image", "Diagram gallery", DATA.diagrams.length + " diagrams", "Every architecture sketch, each with an editable Excalidraw source."]
+      ["#/diagrams", "image", "Diagram gallery", DATA.diagrams.length + " diagrams", "Every architecture sketch, each with an editable Excalidraw source."],
+      ["#/section/12-practice", "target", "Practice drills", "40+ drills", "Estimation, database optimization, networking troubleshooting and cost exercises with worked answers."],
+      ["#/note/12-practice/05-design-question-bank", "briefcase", "Question bank", "50 questions", "The most asked design questions by difficulty, each linked to the notes that answer it."]
     ];
-    html += '<section class="block"><div class="block-head"><div><h2>Practice formats</h2><p>Different ways to make it stick.</p></div></div><div class="grid c4">' +
+    html += '<section class="block"><div class="block-head"><div><h2>Practice formats</h2><p>Different ways to make it stick.</p></div></div><div class="grid c3">' +
       formats.map(function (f) {
         return '<a class="card" href="' + f[0] + '"><span class="icon-tile brand">' + icon(f[1]) + "</span><h3>" + f[2] + "</h3><p>" + f[4] + '</p><div class="foot"><span>' + f[3] + "</span>" + icon("chevron") + "</div></a>";
       }).join("") + "</div></section>";
@@ -294,6 +296,12 @@
       img.addEventListener("click", function () { lightbox(img.src); });
     });
     container.querySelectorAll("figcaption .ic").forEach(function (i) { i.style.width = "14px"; i.style.height = "14px"; i.style.verticalAlign = "-2px"; });
+    var first = container.querySelector("blockquote");
+    if (first && /^TL;DR/.test((first.querySelector("strong") || {}).textContent || "")) {
+      first.classList.add("tldr");
+      var label = first.querySelector("p");
+      if (label && label.textContent.trim() === "TL;DR") label.outerHTML = '<p class="tldr-label">' + icon("target") + " Key takeaways</p>";
+    }
     container.querySelectorAll("h2, h3").forEach(function (h) {
       h.id = slugify(h.textContent);
       h.appendChild(el('<a class="anchor" href="' + noteHref(slug, h.id) + '" aria-label="Link to section">#</a>'));

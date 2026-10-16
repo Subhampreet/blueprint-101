@@ -8,6 +8,12 @@ time: 25 min
 
 # Real Time Communication
 
+> **TL;DR**
+> - Short polling is simple but wasteful; long polling holds requests open; SSE streams server to client; WebSockets are full duplex.
+> - Pick SSE for one-way updates, WebSockets for chat and collaboration, push notifications for backgrounded mobile apps.
+> - Scaling persistent connections is about routing: gateways hold sockets, a registry maps users to gateways, pub/sub delivers.
+> - Plan for reconnect storms with jittered backoff and resume tokens.
+
 HTTP is request/response: the client asks, the server answers. Real time features (chat, notifications, live scores, collaborative editing, ride tracking) need the **server to push** data as soon as it exists.
 
 ![Polling vs long polling vs SSE vs WebSocket](../../assets/diagrams/realtime-options.svg)

@@ -8,6 +8,12 @@ time: 25 min
 
 # Object Storage and Search Engines
 
+> **TL;DR**
+> - Object storage (S3) holds files cheaply and durably; keep searchable metadata in a database.
+> - Upload and download directly with presigned URLs and multipart uploads, not through your app servers.
+> - Search engines use inverted indexes (word to documents) and relevance ranking (BM25 and more).
+> - The database stays the source of truth; keep the search index in sync with change data capture.
+
 Two building blocks that show up in almost every product design: somewhere to put large files, and a way to search text.
 
 ## Storage types

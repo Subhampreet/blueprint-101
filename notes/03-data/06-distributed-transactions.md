@@ -8,6 +8,12 @@ time: 30 min
 
 # Distributed Transactions, Sagas and Idempotency
 
+> **TL;DR**
+> - Two-phase commit gives atomicity across databases but blocks on coordinator failure and adds latency.
+> - Sagas split a business transaction into local steps with compensations; choreography for short flows, orchestration for long ones.
+> - The transactional outbox makes "update the DB and publish an event" atomic.
+> - Retries are inevitable, so every step must be idempotent (idempotency keys, conditional writes, dedup tables).
+
 Inside one database, a transaction gives you atomicity for free. Once a business operation touches **several services or databases** (orders, payments, inventory), you need a strategy to keep them consistent when some steps fail.
 
 ## Two-phase commit (2PC)

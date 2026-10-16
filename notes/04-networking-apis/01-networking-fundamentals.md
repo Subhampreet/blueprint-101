@@ -8,6 +8,12 @@ time: 40 min
 
 # Networking Fundamentals
 
+> **TL;DR**
+> - Know the layers: application (HTTP), transport (TCP/UDP/QUIC), network (IP), link (Ethernet).
+> - TCP gives a reliable ordered stream but costs a handshake round trip and slow start; reuse connections.
+> - UDP and QUIC avoid head-of-line blocking; QUIC powers HTTP/3 and survives network changes.
+> - Debug with ping, mtr, dig, curl -w, ss and tcpdump.
+
 You do not need to be a network engineer for system design, but you must reason about round trips, connection costs, packet loss and what each layer of infrastructure can see.
 
 ## OSI vs TCP/IP

@@ -9,6 +9,11 @@ lab: hash-ring
 
 # Build: Consistent Hash Ring
 
+> **TL;DR**
+> - A sorted list of virtual node positions plus binary search implements the ring.
+> - Adding an 11th node moves about 8% of keys, versus about 91% with modulo hashing.
+> - Preference lists pick replicas on distinct physical nodes, as Dynamo and Cassandra do.
+
 Theory: [Consistent Hashing](../02-building-blocks/06-consistent-hashing.md).
 
 ## Code

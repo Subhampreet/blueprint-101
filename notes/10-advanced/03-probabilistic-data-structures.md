@@ -8,6 +8,12 @@ time: 25 min
 
 # Probabilistic Data Structures
 
+> **TL;DR**
+> - Trade a small, bounded error for tiny, fixed memory, and merge results across machines.
+> - Bloom filter: "definitely not present" or "probably present".
+> - HyperLogLog counts distinct items in about 12 KB; Count-Min Sketch estimates frequencies and top-k.
+> - t-digest estimates percentiles across hosts; MinHash and SimHash measure similarity.
+
 When exact answers would need memory proportional to the data (billions of IDs), these structures give **approximate answers with bounded error in tiny, fixed memory**, and they are usually **mergeable** across machines, which is exactly what distributed systems need.
 
 ## Bloom filter: "have I seen this?"

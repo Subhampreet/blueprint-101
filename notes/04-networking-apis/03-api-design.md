@@ -8,6 +8,12 @@ time: 40 min
 
 # API Design (REST, GraphQL, gRPC)
 
+> **TL;DR**
+> - REST models resources with HTTP verbs; GraphQL lets clients choose fields; gRPC gives typed, fast service-to-service calls.
+> - Use cursor pagination for growing lists, idempotency keys for writes, and one consistent error format.
+> - Evolve APIs additively; version only for breaking changes, with deprecation periods.
+> - Authorize every object access, validate every input, and rate limit every client.
+
 An API is a contract. Good APIs are **predictable, hard to misuse, evolvable without breaking clients, and efficient for the common case**. In interviews, writing 3 to 5 clean endpoints early anchors the whole design.
 
 ![API styles](../../assets/diagrams/api-styles.svg)

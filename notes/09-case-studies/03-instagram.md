@@ -8,6 +8,12 @@ time: 40 min
 
 # Design Instagram
 
+> **TL;DR**
+> - Two systems in one: a media pipeline (upload, process, CDN) and a ranked social feed.
+> - Upload originals directly to object storage, then resize and encode asynchronously into immutable, CDN-cached variants.
+> - Feeds combine hybrid fanout with ML ranking; likes use sharded or batched counters to survive viral posts.
+> - Stories are short-lived data with TTLs and their own tray.
+
 Instagram combines a **media pipeline** (upload, process, store, deliver images and video) with a **social feed** (like Twitter, but ranked and media heavy).
 
 ## 1. Requirements

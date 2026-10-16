@@ -8,6 +8,12 @@ time: 30 min
 
 # Deployment, Infrastructure and Cost
 
+> **TL;DR**
+> - Containers package services immutably; Kubernetes keeps the desired state running and scales it.
+> - Ship safely with CI/CD, canaries or blue-green deploys, feature flags and backward-compatible migrations.
+> - Autoscale on meaningful metrics and keep headroom, because scaling takes time.
+> - Know the cost categories (compute, storage, data transfer, managed services, licensing) and their biggest levers.
+
 ## Containers and orchestration
 
 - **Docker / OCI containers** package an app with its dependencies into an immutable image. Same artifact in dev, CI and prod. Lighter than VMs (shared kernel), start in seconds.

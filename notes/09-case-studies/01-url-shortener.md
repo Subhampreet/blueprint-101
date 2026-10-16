@@ -8,6 +8,12 @@ time: 35 min
 
 # Design a URL Shortener
 
+> **TL;DR**
+> - Read-heavy (about 100:1) with tiny writes; the interesting parts are ID generation and fast redirects.
+> - Use range-allocated counters scrambled into 7-character base62 codes: unique, short and not guessable.
+> - Serve redirects from cache; choose 302 if you need per-click analytics.
+> - Send click analytics asynchronously and guard against abuse with rate limits and URL checks.
+
 A classic first question. The scale is modest; the interesting parts are **ID generation**, **read path latency**, and **analytics**.
 
 ## 1. Requirements
@@ -91,7 +97,7 @@ def base62(n: int, width: int = 7) -> str:
     return "".join(reversed(s)).rjust(width, "0")
 
 SPACE = 62 ** 7
-MULT = 1_580_030_173          # odd and coprime with 62^7, so the mapping is a bijection
+MULT = 2_176_477_521_739      # about 0.618 x 62^7, odd and not divisible by 31, so the mapping is a bijection
 
 def code_for(counter_value: int) -> str:
     return base62((counter_value * MULT) % SPACE)

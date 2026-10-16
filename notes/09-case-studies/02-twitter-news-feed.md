@@ -9,6 +9,12 @@ lab: fanout
 
 # Design Twitter / X
 
+> **TL;DR**
+> - The core problem is fanout: one tweet must appear in millions of timelines while reads stay fast.
+> - Push tweet IDs into followers' cached timelines on write; pull celebrities' tweets at read time (hybrid).
+> - Cache everything in layers (timeline IDs, tweet bodies, users, counts) so reads skip databases.
+> - Shard by user and tweet ID, and decouple writes from fanout with an event stream.
+
 The canonical **read-heavy feed** problem. The core challenge is the **timeline fanout problem**: one write must be visible in millions of feeds, and reads must be fast.
 
 ## 1. Requirements

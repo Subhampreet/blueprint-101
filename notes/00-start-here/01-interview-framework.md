@@ -8,6 +8,12 @@ time: 20 min
 
 # The System Design Interview Framework
 
+> **TL;DR**
+> - A design interview is a simulated design review: you are graded on how you clarify, decide and justify, not on a single right answer.
+> - Follow 7 steps: requirements, estimation, API, data model, high-level design, deep dives, wrap-up.
+> - Pin non-functional requirements with numbers early; they decide the architecture more than the features do.
+> - Always say the trade-off: "I chose X because of requirement R; it costs C, which I mitigate with M."
+
 A design interview is not a quiz with one right answer. It is a simulation of you leading a design review. The interviewer watches **how you reduce ambiguity, make decisions, and defend trade-offs** while the problem keeps changing under you.
 
 ![A 45 minute system design interview](../../assets/diagrams/interview-flow.svg)

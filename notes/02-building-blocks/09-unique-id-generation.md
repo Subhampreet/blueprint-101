@@ -8,6 +8,12 @@ time: 20 min
 
 # Unique ID Generation
 
+> **TL;DR**
+> - Distributed IDs must be unique without a central bottleneck; you also choose size, ordering and guessability.
+> - Snowflake: 41-bit time + machine id + sequence in 64 bits, roughly time-ordered, no coordination per ID.
+> - UUIDv7/ULID are sortable 128-bit IDs; UUIDv4 is random and hurts B-tree insert locality.
+> - Time-based IDs are only roughly ordered across machines because clocks drift.
+
 Every entity needs an ID. On one database, `AUTO_INCREMENT` is fine. Across shards, regions and offline clients, generating IDs becomes a design problem.
 
 ## What do you need from an ID?

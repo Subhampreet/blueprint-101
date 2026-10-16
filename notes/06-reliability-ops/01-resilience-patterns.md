@@ -8,6 +8,12 @@ time: 30 min
 
 # Resilience Patterns
 
+> **TL;DR**
+> - Most outages are cascades: a slow dependency ties up callers until everything stops.
+> - Every remote call needs a timeout; retries need backoff, jitter, limits and idempotency.
+> - Circuit breakers fail fast when a dependency is down; bulkheads isolate resources so one failure stays contained.
+> - Under overload, shed low-priority work and degrade features gracefully instead of failing everything.
+
 In a distributed system something is always failing: a slow disk, a GC pause, a bad deploy, a dropped packet, an overloaded dependency. Resilience patterns stop **local failures from becoming global outages**. The most common outage story is not "a server died"; it is "a dependency got slow, callers piled up waiting, and the whole call graph fell over" (cascading failure).
 
 ## Timeouts

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="32 -22 982.9 438.2" width="983" height="438" font-family="Virgil, Excalifont, 'Comic Sans MS', 'Chalkboard SE', 'Segoe Print', 'Bradley Hand', cursive">
+<rect x="32" y="-22" width="982.9" height="438.2" rx="14" fill="#ffffff"/>
+<text font-size="22" fill="#1e1e1e" text-anchor="start"><tspan x="58" y="12">TCP congestion window over time (Reno style)</tspan></text>
+<path d="M57.3 22.9 Q387.2 21.1 568.6 21.1" stroke="#e8590c" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+<path d="M66.5 361.5 Q613.4 358.5 974.9 360.3 M66.9 358.9 Q647.8 359.9 973.9 359" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M962.8 354.7 Q969.6 357.6 973.9 360.3 M962.2 365.7 Q968.5 362.1 973.7 359.8" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M59.5 355.4 Q60.2 195.5 61.1 64.8 M61.3 354.3 Q58.5 232.3 60 67.3" stroke="#1e1e1e" stroke-width="1.6" fill="none" stroke-linecap="round"/><path d="M54.3 77.8 Q56.8 73.2 59.6 66.2 M66.1 77.9 Q63.3 72 59.6 66.3" stroke="#1e1e1e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path d="M65.9 349.1 Q86.5 345.6 120.1 340.3 M65.6 348.4 Q86.9 345.8 120.6 340.4 M120.1 339.8 Q148.8 323.4 170.6 310.2 M119.6 340.5 Q152 321.8 170.2 310.6 M170.1 310.5 Q192.5 278.2 210 250.3 M169.5 310 Q194.6 271.2 210.1 250 M209.2 250.5 Q223.2 215.3 240.1 169.3 M209.6 250.9 Q229.4 203.5 240.9 170.8 M239.7 170.2 Q267.8 159.7 299.8 149.5 M240.3 169.5 Q263.9 160.6 299.3 149.8 M300.4 150.4 Q324.6 141.9 360.2 130.5 M300.4 150.5 Q335 139.3 360.2 129.9 M360.2 130 Q391.7 119.4 420.4 110.6 M360.1 130.3 Q397.7 118.5 420.1 109.7 M419.4 110.4 Q425.9 183.4 430 229.6 M420.2 109.9 Q424.8 157 430.6 229.2 M429.2 229.8 Q469.7 216.7 499.9 209.3 M429.2 230 Q473 216.2 499.3 209.6 M499.8 210 Q530.2 201.3 569.4 190.2 M499.7 209.9 Q538.8 199.5 569.7 190.6 M569.8 189.9 Q607.9 180.1 640.8 170.5 M570.5 189.2 Q595.1 182.1 640.3 169.5 M641.2 169.5 Q645 278.6 649.2 350.3 M639.9 170.9 Q643 249.2 648.9 350.3 M649.4 350.5 Q669.8 339 690.2 329.7 M650.4 349.6 Q675 336.6 689.7 329.4 M689.3 330.2 Q713.5 306.1 730.3 290.3 M690.2 329.7 Q715.4 304.7 729.6 289.5 M729.3 289.9 Q745.5 262.5 759.7 240.6 M730.6 289.6 Q746.6 262.9 760.4 240.4 M759.5 239.7 Q783.8 231.6 800.6 225.4 M760.2 240.3 Q778.5 233.1 800.5 224.8 M799.3 224.7 Q833.3 213.7 859.8 204.5 M799.8 224.4 Q833.2 213.9 860.1 204.6 M859.4 204.4 Q881.9 198.3 913.7 187.3 M860.2 205.3 Q887.5 194.7 913.6 186.7" stroke="#1971c2" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+<path d="M65.9 241 Q412.2 243.1 972.8 240.8" stroke="#e8590c" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="7 6"/>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="60" y="361"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="980" y="361"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="60" y="61"></tspan></text>
+<text font-size="14" fill="#495057" text-anchor="start"><tspan x="900" y="384">time (RTTs)</tspan></text>
+<text font-size="14" fill="#495057" text-anchor="start"><tspan x="70" y="64">cwnd</tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="60" y="351"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="920" y="186"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="60" y="241"></tspan></text>
+<text font-size="1" fill="#1e1e1e" text-anchor="middle"><tspan x="980" y="241"></tspan></text>
+<text font-size="13" fill="#1e1e1e" text-anchor="start"><tspan x="120" y="283">slow start:</tspan><tspan x="120" y="299.2">doubles per RTT</tspan></text>
+<text font-size="13" fill="#1e1e1e" text-anchor="start"><tspan x="290" y="103">congestion avoidance:</tspan><tspan x="290" y="119.2">+1 MSS per RTT</tspan></text>
+<text font-size="13" fill="#1e1e1e" text-anchor="start"><tspan x="440" y="263">3 dup ACKs:</tspan><tspan x="440" y="279.2">halve (fast recovery)</tspan></text>
+<text font-size="13" fill="#1e1e1e" text-anchor="start"><tspan x="660" y="133">timeout:</tspan><tspan x="660" y="149.2">back to 1 MSS</tspan></text>
+<rect x="890.6" y="228.6" width="76" height="22.8" rx="6" fill="#ffffff" fill-opacity="0.92"/><text font-size="15" fill="#e8590c" text-anchor="middle"><tspan x="928.6" y="245.2">ssthresh</tspan></text>
+</svg>

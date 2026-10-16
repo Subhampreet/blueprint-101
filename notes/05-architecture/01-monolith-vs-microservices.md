@@ -8,6 +8,12 @@ time: 35 min
 
 # Monolith vs Microservices
 
+> **TL;DR**
+> - Start with a modular monolith; microservices solve organizational scaling at a real operational cost.
+> - Draw service boundaries around business capabilities (bounded contexts), each owning its data.
+> - Prefer events for state changes across services and keep synchronous call chains short.
+> - Migrate gradually with the strangler fig pattern.
+
 ![Monolith vs microservices](../../assets/diagrams/monolith-vs-microservices.svg)
 
 ## Monolith

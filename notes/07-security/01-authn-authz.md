@@ -8,6 +8,12 @@ time: 35 min
 
 # Authentication and Authorization
 
+> **TL;DR**
+> - Authentication proves who you are; authorization decides what you may do. Check both on every request.
+> - Use OAuth 2.0 authorization code with PKCE for apps, OIDC for login identity, client credentials for machine-to-machine.
+> - Short-lived JWT access tokens plus rotating refresh tokens give stateless checks and practical revocation.
+> - RBAC covers most apps; ABAC or relationship-based access handles contextual and sharing rules.
+
 - **Authentication (AuthN)**: *who are you?* Proving identity.
 - **Authorization (AuthZ)**: *what are you allowed to do?* Checking permissions for an action on a resource.
 

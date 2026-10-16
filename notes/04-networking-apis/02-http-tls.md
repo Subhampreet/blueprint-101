@@ -8,6 +8,12 @@ time: 30 min
 
 # HTTP, HTTPS and TLS
 
+> **TL;DR**
+> - HTTP/1.1 does one request at a time per connection; HTTP/2 multiplexes over TCP; HTTP/3 multiplexes over QUIC without head-of-line blocking.
+> - Use methods and status codes correctly: 4xx means the client must change something, 5xx means the server failed.
+> - Caching headers (Cache-Control, ETag) and CORS are everyday design tools.
+> - TLS 1.3 encrypts and authenticates in one round trip using ephemeral keys (forward secrecy).
+
 ## HTTP versions
 
 ![HTTP versions](../../assets/diagrams/http-versions.svg)

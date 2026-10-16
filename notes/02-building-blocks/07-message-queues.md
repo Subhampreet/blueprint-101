@@ -8,6 +8,12 @@ time: 35 min
 
 # Message Queues, Pub/Sub and Event Streams
 
+> **TL;DR**
+> - Queues let a producer hand off work and move on: decoupling, spike absorption and independent scaling.
+> - Work queues give each message to one consumer; pub/sub gives every subscriber a copy; logs like Kafka keep messages for replay.
+> - Delivery is at-least-once in practice, so consumers must be idempotent; ordering is per partition (per key).
+> - Use the transactional outbox to update a database and publish an event atomically, and dead letter queues for poison messages.
+
 ## Why go asynchronous
 
 In a synchronous call the caller waits, and the caller's availability and latency now include the callee's. A message broker sits in between and lets the producer hand off work and move on.

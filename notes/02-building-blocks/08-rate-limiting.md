@@ -9,6 +9,12 @@ lab: rate-limiter
 
 # Rate Limiting and Throttling
 
+> **TL;DR**
+> - Rate limiting caps how often a client can call you, protecting capacity, fairness and cost; excess gets HTTP 429.
+> - Token bucket allows bursts with a steady average; sliding window counter is accurate and cheap; fixed windows allow edge bursts.
+> - In a distributed system, counters live in a shared store (Redis) and must be updated atomically (Lua or INCR).
+> - Decide in advance whether to fail open or closed when the limiter's store is down.
+
 A rate limiter caps how many requests a client (user, API key, IP, tenant) can make in a period. It protects services from abuse and overload, enforces fairness and pricing tiers, and controls cost (for example, calls to a paid third party API).
 
 - **Rate limiting**: reject excess requests (HTTP **429 Too Many Requests**).

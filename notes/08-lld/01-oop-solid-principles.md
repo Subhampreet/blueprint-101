@@ -8,6 +8,12 @@ time: 30 min
 
 # OOP, SOLID and Design Principles
 
+> **TL;DR**
+> - SOLID keeps code easy to change: one reason to change per class, extend without modifying, substitutable subtypes, small interfaces, depend on abstractions.
+> - Prefer composition over deep inheritance; inject dependencies through constructors.
+> - DRY, KISS and YAGNI keep designs lean, applied with judgment.
+> - Separate expected business errors from unexpected failures and translate errors at layer boundaries.
+
 LLD interviews ("design a parking lot", "design Splitwise", "design a rate limiter class") test whether your code would survive real change: new requirements, new teammates, new edge cases. Principles are the vocabulary for explaining why your design is easy to change.
 
 ## OOP pillars (quick refresher)

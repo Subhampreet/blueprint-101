@@ -9,6 +9,12 @@ lab: quorum
 
 # Replication
 
+> **TL;DR**
+> - Replication keeps copies for availability, read scaling, latency and durability.
+> - Single leader is simplest; multi-leader and leaderless allow writes anywhere but need conflict resolution.
+> - Async replicas lag, which breaks read-your-writes and monotonic reads unless you route carefully.
+> - Quorums (R + W > N) make reads see the latest write; change data capture streams the DB log to other systems.
+
 Replication keeps copies of the same data on multiple machines to get:
 
 - **Availability**: keep serving if a node dies.

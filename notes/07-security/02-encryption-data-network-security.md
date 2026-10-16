@@ -8,6 +8,12 @@ time: 40 min
 
 # Encryption, Data, API and Network Security, Compliance
 
+> **TL;DR**
+> - Encrypt in transit (TLS everywhere) and at rest; use envelope encryption with keys in a KMS or HSM.
+> - Store passwords with slow, salted hashes (argon2id, bcrypt), never plain SHA.
+> - Defend in depth: WAF and DDoS protection at the edge, private subnets, least-privilege access, zero trust inside.
+> - Compliance (GDPR, PCI, HIPAA, SOC 2) shapes design: data minimization, deletion, audit logs, scope reduction.
+
 ## Cryptography essentials
 
 ### Symmetric encryption

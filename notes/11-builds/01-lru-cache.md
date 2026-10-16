@@ -9,6 +9,11 @@ lab: cache
 
 # Build: LRU Cache
 
+> **TL;DR**
+> - A hash map plus a doubly linked list gives O(1) get, put and eviction.
+> - Move items to the front on access; evict from the tail when full.
+> - Production caches approximate LRU or use LFU variants for better hit rates.
+
 Asked as an LLD/coding question ("LeetCode 146") and as the core of [distributed cache design](../09-case-studies/13-distributed-cache.md).
 
 ## Design
