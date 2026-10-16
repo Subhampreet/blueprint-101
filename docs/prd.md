@@ -26,16 +26,41 @@ Inspiration: the structure of GreatFrontEnd's "Get Started" page (study plans, r
 
 ### In scope (shipped)
 
-- **Notes**: 71 Markdown notes in 13 sections with front matter (`title`, `summary`, `tags`, `level`, `time`, optional `lab`). Every note ends with interview Q&A in `<details>` blocks.
+- **Notes**: 96 Markdown notes in 14 sections with front matter (`title`, `summary`, `tags`, `level`, `time`, optional `lab`). Every note ends with interview Q&A in `<details>` blocks.
 - **Diagrams**: hand-drawn (Excalidraw style) SVGs generated from Python definitions, each with an editable `.excalidraw` source.
 - **Builds**: runnable from-scratch implementations with self-checks, embedded into notes via `tools/sync_builds.py`.
 - **Reader site** (`site/`, static, no framework):
   - Get Started dashboard: hero with stats, resume cards, recommended 4-step path, study plans, company practice sets, focus areas, practice formats.
   - Study plans (1 Week, 1 Month, 3 Months) and company practice sets, each a list page with progress and a Continue button.
   - Section pages, note pages (TOC, prev/next, mark complete, Excalidraw downloads, lightbox), search (`/` or Cmd+K), flashcards (Leitner boxes), diagram gallery, 10 interactive labs.
-  - Progress, flashcard boxes, open sidebar sections and theme stored in `localStorage` (per browser, optional).
+  - Local learner profile (see section 4a): name, progress, flashcard boxes, bookmarks, personal notes and daily streak, all in `localStorage`.
+  - "Your progress" page (`#/profile`): stats, activity heatmap, saved and recently completed notes, per-section progress, export/import/reset.
   - Light and dark themes; responsive down to 360px.
 - **Tooling**: `tools/build_site.py` (content.js, site assets, README index), `tools/check_notes.py` (lint, links, no long dashes), CI workflow.
+
+### 4a. Learner profile and local persistence
+
+Many people use the site, each with their own progress, but there are no accounts and no backend. Decision: keep everything in the browser's `localStorage`.
+
+| Option | Survives refresh and restart | Effort | Verdict |
+|---|---|---|---|
+| `localStorage` | Yes (until site data is cleared) | Synchronous key/value, about 5 MB per origin | **Chosen**: our data is tens of KB, reads are instant, no async plumbing |
+| `sessionStorage` | No (dies with the tab) | Same API | Rejected |
+| IndexedDB | Yes | Async, transactions, more code | Overkill for small JSON; revisit only if we store large blobs |
+| Cookies | Yes | 4 KB limit, sent with every request | Rejected |
+| Cache API / service worker | Yes | Built for HTTP responses | Wrong tool (could later power offline reading) |
+| Backend DB + accounts | Across devices | Auth, hosting, privacy work | Out of scope; export/import covers moving devices |
+
+Rules:
+
+- **Keys** (all prefixed `bp-`): learner data `profile`, `done`, `boxes`, `saved`, `activity`, `memo`, `last`; preferences `theme`, `open`, `fc-scope`. Export, import and reset act on learner data only.
+- **Name prompt**: a "Track your progress" card on Get started, and a one-time dialog the first time someone marks a note complete without a profile. "Not now" records an empty name so we never ask twice.
+- **Say where data lives**: every place that collects the name states that progress is saved only in this browser on this device, and the profile page explains what erases it (clearing site data, private windows, another browser).
+- **Never throw**: every storage call is wrapped; if storage is blocked the site works and the profile page shows a warning.
+- **Eviction**: after a name is saved we call `navigator.storage.persist()` so the browser keeps the data under storage pressure where supported.
+- **Backup format**: `{ app: "blueprint-101", version: 1, exported, data: {...} }`. Import validates and drops unknown notes, malformed values and unknown keys, then replaces local data after a confirmation.
+- **Multi-tab**: a `storage` event listener reloads state so progress made in one tab shows up in the others.
+- **Privacy**: nothing is sent anywhere; the name is only shown back to the learner.
 
 ### Out of scope (for now)
 
@@ -53,6 +78,7 @@ Inspiration: the structure of GreatFrontEnd's "Get Started" page (study plans, r
 4. Links inside notes to other notes stay inside the reader; links to code (`builds/`, `tools/`) open on GitHub.
 5. Labs run fully client-side and stop their animation loops on navigation.
 6. Flashcards are generated automatically from note Q&A; no manual deck maintenance.
+7. Progress, bookmarks, notes and streaks persist across refreshes and browser restarts in the same browser, and can be exported and imported as a JSON file.
 
 ### Non-functional
 
@@ -72,6 +98,7 @@ Get started (#/)
   Labs (#/labs) -> lab (#/lab/<id>)
   Flashcards (#/flashcards[/<section or slug>])
   Diagram gallery (#/diagrams)
+  Your progress (#/profile): profile, stats, backup
 ```
 
 Routing is hash-based so it works on any static host and from `file://`.
@@ -94,7 +121,7 @@ Routing is hash-based so it works on any static host and from `file://`.
 
 ## 9. Roadmap ideas
 
-1. Export/import progress (JSON) so learners can move between devices without accounts.
+1. Shipped: export/import progress (JSON). Next: optional sync through a share code or a user-owned file (e.g. a GitHub gist) without running our own backend.
 2. Timed mock mode: pick a case study, 45 minute timer, structured self-review rubric.
 3. Per-company question frequency notes once sourced from public interview reports.
 4. More labs: consistent hashing with bounded load, Raft leader election, CDN cache hit ratio, Little's law.

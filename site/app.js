@@ -41,7 +41,13 @@
     home: "M3 10.5 12 3l9 7.5V21H3zM9 21v-7h6v7",
     external: "M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6",
     download: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3",
-    pen: "M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"
+    pen: "M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z",
+    user: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8a4 4 0 1 0 0-8z",
+    bookmark: "M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z",
+    lock: "M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4",
+    flame: "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z",
+    upload: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12",
+    trash: "M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"
   };
   var GITHUB = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
   function icon(name) {
@@ -54,12 +60,53 @@
   };
 
   // ------------------------------------------------------------ storage (never throws)
+  // Everything a learner owns lives in localStorage under "bp-*" keys: it survives refreshes and browser restarts,
+  // stays on this device, and never leaves it. Export/import moves it between browsers.
   var store = {
+    ok: (function () { try { localStorage.setItem("bp-probe", "1"); localStorage.removeItem("bp-probe"); return true; } catch (e) { return false; } })(),
     get: function (k, d) { try { var v = localStorage.getItem("bp-" + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
-    set: function (k, v) { try { localStorage.setItem("bp-" + k, JSON.stringify(v)); } catch (e) { /* private mode */ } }
+    set: function (k, v) { try { localStorage.setItem("bp-" + k, JSON.stringify(v)); } catch (e) { /* private mode or quota */ } },
+    del: function (k) { try { localStorage.removeItem("bp-" + k); } catch (e) { /* ignore */ } }
   };
-  var done = store.get("done", {});
-  var openSections = store.get("open", { "00-start-here": true });
+  // learner data: what export, import and reset act on (theme, open sidebar sections and deck choice are preferences)
+  var USER_KEYS = ["profile", "done", "boxes", "saved", "activity", "memo", "last"];
+  var profile, done, saved, activity, memo, openSections;
+  function loadState() {
+    profile = store.get("profile", null);         // { name, since }
+    done = store.get("done", {});                 // slug -> completion time (ms); older data stores true
+    saved = store.get("saved", {});               // slug -> time saved for later
+    activity = store.get("activity", {});         // "YYYY-MM-DD" -> actions that day (completions, flashcard reviews)
+    memo = store.get("memo", {});                 // slug -> personal notes
+    openSections = store.get("open", { "00-start-here": true });
+  }
+  loadState();
+
+  function dayKey(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function bump() { var k = dayKey(new Date()); activity[k] = (activity[k] || 0) + 1; store.set("activity", activity); }
+  function streak() {
+    var d = new Date(), n = 0;
+    if (!activity[dayKey(d)]) d.setDate(d.getDate() - 1);            // today not started yet: the streak is still alive
+    while (activity[dayKey(d)]) { n++; d.setDate(d.getDate() - 1); }
+    return n;
+  }
+  function bestStreak() {
+    var days = Object.keys(activity).sort(), best = 0, run = 0, prev = null;
+    days.forEach(function (k) {
+      var t = new Date(k + "T00:00:00");
+      run = prev && Math.round((t - prev) / 864e5) === 1 ? run + 1 : 1;
+      best = Math.max(best, run); prev = t;
+    });
+    return best;
+  }
+  function firstName() { return profile && profile.name ? profile.name.split(/\s+/)[0] : ""; }
+  function initials() { return profile && profile.name ? profile.name.trim().split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase() : ""; }
+  function saveProfile(name) {
+    profile = { name: String(name || "").trim().slice(0, 40), since: (profile && profile.since) || new Date().toISOString() };
+    store.set("profile", profile);
+    // ask the browser not to evict our data under storage pressure (granted silently or ignored)
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) { /* ignore */ }
+    paintAvatar();
+  }
 
   // ------------------------------------------------------------ helpers
   var ORDER = [];
@@ -102,7 +149,8 @@
       ["#/flashcards", "cards", "Flashcards", "", route.key === "flashcards"],
       ["#/diagrams", "image", "Diagram gallery", DATA.diagrams.length, route.key === "diagrams"]
     ];
-    var html = '<div class="side-progress"><div class="row"><span>Your progress</span><span><b>' + d + "</b> / " + total + "</span></div>" + progressBar(d, total) + "</div>" +
+    var html = '<a class="side-progress' + (route.key === "profile" ? " active" : "") + '" href="#/profile"><div class="row"><span>' + (firstName() ? esc(firstName()) + "'s progress" : "Your progress") +
+      "</span><span><b>" + d + "</b> / " + total + "</span></div>" + progressBar(d, total) + "</a>" +
       '<div class="side-group">' + links.map(function (l) {
         return '<a class="side-link' + (l[4] ? " active" : "") + '" href="' + l[0] + '">' + icon(l[1]) + "<span>" + l[2] + '</span><span class="count">' + l[3] + "</span></a>";
       }).join("") + '</div><div class="side-group"><p class="side-label">Notes</p>';
@@ -139,6 +187,55 @@
 
   function nextNote(notes) { return notes.filter(function (s) { return !done[s]; })[0] || notes[0]; }
 
+  var LOCAL_NOTE = icon("lock") + " Saved only in this browser on this device. No account and no server: nothing leaves your machine.";
+
+  // home strip: a name form for new visitors, a personal summary for returning ones
+  function welcomeStrip() {
+    if (!profile || !profile.name) {
+      return '<section class="card welcome"><div class="welcome-main"><span class="icon-tile brand">' + icon("user") + "</span><div><h3>Track your progress</h3>" +
+        "<p>Add your name to start. Completed notes, flashcard boxes, bookmarks, personal notes and your daily streak are remembered across refreshes and restarts.</p></div></div>" +
+        '<form class="name-form" id="welcomeForm"><input type="text" id="welcomeName" maxlength="40" placeholder="Your name" autocomplete="given-name" aria-label="Your name" required>' +
+        '<button class="btn primary" type="submit">Start tracking</button></form><p class="local-note">' + LOCAL_NOTE + ' <a href="#/profile">Learn more</a></p></section>';
+    }
+    var last = store.get("last", null), d = doneCount(ORDER), s = streak(), nSaved = Object.keys(saved).filter(function (k) { return DATA.notes[k]; }).length;
+    return '<section class="card welcome back"><div class="welcome-main"><span class="avatar lg">' + esc(initials()) + "</span><div><h3>Welcome back, " + esc(firstName()) + "</h3>" +
+      '<div class="pills" style="margin-top:8px"><span class="pill brand">' + icon("flame") + " <b>" + s + "</b> day streak</span><span class=\"pill\"><b>" + d + "</b> / " + ORDER.length + " notes done</span>" +
+      '<span class="pill">' + icon("bookmark") + " <b>" + nSaved + "</b> saved</span></div></div></div>" +
+      '<div class="cta">' + (last && DATA.notes[last] ? '<a class="btn primary" href="' + noteHref(last) + '">Continue: ' + esc(shortTitle(DATA.notes[last].title)) + " " + icon("chevron") + "</a>" : "") +
+      '<a class="btn" href="#/profile">' + icon("user") + " Your progress</a></div></section>";
+  }
+  function wireWelcome() {
+    var f = document.getElementById("welcomeForm");
+    if (!f) return;
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = document.getElementById("welcomeName").value.trim();
+      if (!v) return;
+      saveProfile(v);
+      route();
+    });
+  }
+
+  // one-time prompt the first time a learner marks something complete without a profile
+  function askName(then) {
+    var box = el('<div class="modal" role="dialog" aria-modal="true" aria-labelledby="askTitle"><form class="modal-box" id="askForm">' +
+      '<span class="icon-tile brand">' + icon("user") + '</span><h2 id="askTitle">Start tracking your progress</h2>' +
+      "<p>What should we call you? Your progress, flashcards, bookmarks and notes will be remembered next time you visit.</p>" +
+      '<input type="text" id="askName" maxlength="40" placeholder="Your name" autocomplete="given-name" aria-label="Your name">' +
+      '<p class="local-note">' + LOCAL_NOTE + " Clearing site data or using a private window removes it, so export a backup from Your progress.</p>" +
+      '<div class="modal-actions"><button class="btn" type="button" id="askSkip">Not now</button><button class="btn primary" type="submit">Start tracking</button></div></form></div>');
+    function close(name) {
+      saveProfile(name);                     // an empty name still records the choice, so we never ask twice
+      box.remove();
+      then();
+    }
+    box.querySelector("#askForm").addEventListener("submit", function (e) { e.preventDefault(); close(box.querySelector("#askName").value); });
+    box.querySelector("#askSkip").addEventListener("click", function () { close(""); });
+    box.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.stopPropagation(); close(""); } });
+    document.body.appendChild(box);
+    box.querySelector("#askName").focus();
+  }
+
   function renderHome() {
     var total = ORDER.length, qa = ORDER.reduce(function (a, s) { return a + DATA.notes[s].qa.length; }, 0);
     var html = '<section class="hero-card"><span class="pill brand">' + icon("rocket") + " System design interview prep</span>" +
@@ -147,7 +244,7 @@
       '<div class="cta"><a class="btn primary" href="' + noteHref("00-start-here/01-interview-framework") + '">Start the interview playbook ' + icon("chevron") + "</a>" +
       '<a class="btn" href="#/plans">' + icon("calendar") + " Pick a study plan</a></div>" +
       '<div class="hero-stats"><div><b>' + total + "</b><span>in-depth notes</span></div><div><b>" + DATA.diagrams.length + "</b><span>hand-drawn diagrams</span></div><div><b>" +
-      qa + "</b><span>interview questions</span></div><div><b>" + DATA.labs.length + "</b><span>interactive labs</span></div></div></section>";
+      qa + "</b><span>interview questions</span></div><div><b>" + DATA.labs.length + "</b><span>interactive labs</span></div></div></section>" + welcomeStrip();
 
     // resume cards: in-progress collections, otherwise the first two to begin with
     var prog = collectionProgress().map(function (c) { c.d = doneCount(c.notes); c.p = pct(c.d, c.notes.length); return c; });
@@ -164,7 +261,7 @@
     var steps = [
       { n: 1, icon: "rocket", title: "System Design Interview Playbook", desc: "How the interview runs, what is graded, and how to estimate. Read this first.", href: noteHref("00-start-here/01-interview-framework"), notes: SECTION["00-start-here"].notes },
       { n: 2, icon: "target", title: "Blueprint 15", chip: ["brand", "Highest yield"], desc: "The 15 notes that cover the concepts and designs asked most often: caching, queues, sharding, replication, feeds and chat.", href: "#/plan/1-week", notes: PLAN["1-week"].notes },
-      { n: 3, icon: "briefcase", title: "Case study walkthroughs", chip: ["", "Practice"], desc: "Fifteen full interview answers, from URL shortener to payments. Attempt each one yourself before reading it.", href: "#/section/09-case-studies", notes: SECTION["09-case-studies"].notes },
+      { n: 3, icon: "briefcase", title: "Case study walkthroughs", chip: ["", "Practice"], desc: SECTION["09-case-studies"].notes.length + " full interview answers, from URL shortener to search engine. Attempt each one yourself before reading it.", href: "#/section/09-case-studies", notes: SECTION["09-case-studies"].notes },
       { n: 4, icon: "cpu", title: "Advanced deep dives", chip: ["violet", "If you're a senior engineer"], desc: "Consensus, clocks, stream processing, probabilistic structures, geospatial and ML systems for the follow-up questions.", href: "#/section/10-advanced", notes: SECTION["10-advanced"].notes }
     ];
     html += '<section class="block"><div class="block-head"><div><h2>Recommended preparation</h2><p>Not sure where to start? This path works for most people.</p></div></div><div class="timeline">' +
@@ -206,6 +303,7 @@
         return '<a class="card" href="' + f[0] + '"><span class="icon-tile brand">' + icon(f[1]) + "</span><h3>" + f[2] + "</h3><p>" + f[4] + '</p><div class="foot"><span>' + f[3] + "</span>" + icon("chevron") + "</div></a>";
       }).join("") + "</div></section>";
     page(html);
+    wireWelcome();
   }
 
   function planCard(p) {
@@ -327,10 +425,14 @@
       (n.level ? '<span class="chip brand">' + esc(n.level) + "</span>" : "") +
       n.tags.slice(0, 5).map(function (t) { return '<span class="chip">' + esc(t) + "</span>"; }).join("") + "</div>" +
       '<div class="note-actions"><button class="btn small' + (done[slug] ? " done" : " primary") + '" id="doneBtn">' + icon("check") + (done[slug] ? " Completed" : " Mark complete") + "</button>" +
+      '<button class="btn small' + (saved[slug] ? " done" : "") + '" id="saveBtn" aria-pressed="' + !!saved[slug] + '">' + icon("bookmark") + (saved[slug] ? " Saved" : " Save for later") + "</button>" +
       (n.lab ? '<a class="btn small" href="#/lab/' + n.lab + '">' + icon("flask") + " Open the lab</a>" : "") +
       (n.qa.length ? '<a class="btn small" href="#/flashcards/' + slug + '">' + icon("cards") + " " + n.qa.length + " flashcards</a>" : "") +
       '<a class="btn small" href="' + GH + "notes/" + slug + '.md" target="_blank" rel="noopener">' + GITHUB.replace("<svg", '<svg width="15" height="15"') + " GitHub</a></div></header>" +
-      '<div class="prose"></div><nav class="pager">' +
+      '<div class="prose"></div>' +
+      '<section class="memo"><div class="memo-head"><h4>' + icon("pen") + ' My notes</h4><span class="memo-status" id="memoStatus">' + (memo[slug] ? "Saved in this browser" : "Private to this browser") + "</span></div>" +
+      '<textarea id="memoText" rows="4" maxlength="20000" placeholder="Jot down what to remember, a mnemonic, or what tripped you up in a mock.">' + esc(memo[slug] || "") + "</textarea></section>" +
+      '<nav class="pager">' +
       (prev ? '<a href="' + noteHref(prev) + '"><small>Previous</small>' + esc(DATA.notes[prev].title) + "</a>" : "<span></span>") +
       (next ? '<a class="next" href="' + noteHref(next) + '"><small>Next</small>' + esc(DATA.notes[next].title) + "</a>" : "") + "</nav>";
     art.querySelectorAll(".note-actions .ic, .chips .ic").forEach(function (i) { i.style.width = "15px"; i.style.height = "15px"; });
@@ -345,11 +447,23 @@
     }
     main.innerHTML = "";
     main.appendChild(wrap);
+    function refresh() { var y = window.scrollY; renderNote(slug); window.scrollTo(0, y); renderSidebar({ note: slug, key: "note" }); }
     art.querySelector("#doneBtn").addEventListener("click", function () {
-      if (done[slug]) delete done[slug]; else done[slug] = true;
-      store.set("done", done);
-      renderNote(slug);
-      renderSidebar({ note: slug, key: "note" });
+      if (done[slug]) { delete done[slug]; store.set("done", done); return refresh(); }
+      function complete() { done[slug] = Date.now(); store.set("done", done); bump(); refresh(); }
+      if (!profile && store.ok) askName(complete); else complete();
+    });
+    art.querySelector("#saveBtn").addEventListener("click", function () {
+      if (saved[slug]) delete saved[slug]; else saved[slug] = Date.now();
+      store.set("saved", saved);
+      refresh();
+    });
+    var memoText = art.querySelector("#memoText"), memoStatus = art.querySelector("#memoStatus");
+    memoText.addEventListener("input", function () {          // localStorage writes are synchronous and cheap: save every keystroke
+      var v = memoText.value;
+      if (v.trim()) memo[slug] = v; else delete memo[slug];
+      store.set("memo", memo);
+      memoStatus.textContent = store.ok ? "Saved in this browser" : "Storage is blocked: notes will not be kept";
     });
     if (anchor) { var t = document.getElementById(anchor); if (t) t.scrollIntoView(); else window.scrollTo(0, 0); }
     else window.scrollTo(0, 0);
@@ -483,6 +597,7 @@
       var c = cards[i % cards.length];
       boxes[c.id] = good ? Math.min(5, (boxes[c.id] || 1) + 1) : 1;
       store.set("boxes", boxes);
+      bump();
       i++; flipped = false; draw();
     }
     cardEl.addEventListener("click", function (e) { if (e.target.tagName !== "A") { flipped = !flipped; draw(); } });
@@ -535,6 +650,170 @@
     impl.render(document.getElementById("labRoot"));
   }
 
+  // ------------------------------------------------------------ your progress (profile, stats, data controls)
+  function fmtDate(t) { try { return new Date(t).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return ""; } }
+
+  function heatmap(weeks) {
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var start = new Date(today); start.setDate(start.getDate() - (weeks - 1) * 7 - today.getDay());   // columns start on Sunday
+    var cells = "", activeDays = 0;
+    for (var t = new Date(start); t <= today; t.setDate(t.getDate() + 1)) {
+      var k = dayKey(t), n = activity[k] || 0, lv = !n ? 0 : n < 3 ? 1 : n < 6 ? 2 : n < 10 ? 3 : 4;
+      if (n) activeDays++;
+      cells += '<i class="l' + lv + '" title="' + fmtDate(t) + ": " + (n ? n + (n === 1 ? " action" : " actions") : "no activity") + '"></i>';
+    }
+    return '<div class="heat-wrap"><div class="heat" role="img" aria-label="' + activeDays + " active days in the last " + weeks + ' weeks">' + cells + "</div></div>" +
+      '<div class="heat-legend"><span>' + activeDays + " active days in the last " + weeks + ' weeks</span><span class="scale">Less <i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i> More</span></div>';
+  }
+
+  function miniList(slugs, empty, meta) {
+    if (!slugs.length) return '<div class="empty">' + empty + "</div>";
+    return '<div class="list">' + slugs.map(function (slug) {
+      var n = DATA.notes[slug];
+      return '<a class="row-item compact" href="' + noteHref(slug) + '">' + statusDot(slug) + "<span><h3>" + esc(shortTitle(n.title)) + "</h3>" + (meta ? "<p>" + meta(slug) + "</p>" : "") +
+        '</span><span class="meta"><span class="chip">' + esc(SECTION[n.section].title) + "</span></span></a>";
+    }).join("") + "</div>";
+  }
+
+  function renderProfile() {
+    var d = doneCount(ORDER), boxes = store.get("boxes", {});
+    var totalCards = ORDER.reduce(function (a, s) { return a + DATA.notes[s].qa.length; }, 0);
+    var reviewed = Object.keys(boxes).length, mastered = Object.keys(boxes).filter(function (id) { return boxes[id] >= 5; }).length;
+    var mins = ORDER.filter(function (s) { return done[s]; }).reduce(function (a, s) { return a + (parseInt(DATA.notes[s].time, 10) || 0); }, 0);
+    var byTime = function (obj) { return Object.keys(obj).filter(function (s) { return DATA.notes[s]; }).sort(function (a, b) { return (+obj[b] || 0) - (+obj[a] || 0); }); };
+    var savedList = byTime(saved), recent = byTime(done).slice(0, 6), memos = byTime(memo).filter(function (s) { return memo[s]; });
+    var named = profile && profile.name;
+
+    var html = '<div class="crumbs"><a href="#/">Get started</a> / Your progress</div>' +
+      '<div class="page-head profile-head"><span class="avatar xl">' + (named ? esc(initials()) : icon("user")) + '</span><div style="flex:1;min-width:240px">' +
+      "<h1>" + (named ? esc(profile.name) : "Your progress") + "</h1><p>" + (profile && profile.since ? "Learning since " + fmtDate(profile.since) + "." : "Add your name to personalise this page.") + "</p>" +
+      '<form class="name-form" id="nameForm"><input type="text" id="nameInput" maxlength="40" placeholder="Your name" autocomplete="given-name" aria-label="Your name" value="' + esc(named ? profile.name : "") + '">' +
+      '<button class="btn" type="submit">' + (named ? "Update name" : "Save name") + "</button></form></div></div>";
+
+    html += store.ok
+      ? '<div class="callout local">' + icon("lock") + "<div><b>Your progress lives in this browser.</b> It is saved in local storage on this device, so it survives refreshes, closing the tab and restarting the browser. " +
+        "It does not follow you to another browser or device, and it is erased if you clear this site's data or use a private window. Export a backup to keep a copy or move it. " +
+        '<span id="persistState"></span></div></div>'
+      : '<div class="callout bad">' + icon("lock") + "<div><b>Your browser is blocking storage</b> (a private window or strict privacy settings), so progress resets when this tab closes. Open the site in a normal window to keep it.</div></div>";
+
+    html += '<div class="grid kpis" style="margin-top:20px">' +
+      '<div class="kpi"><span>Notes completed</span><b>' + d + " / " + ORDER.length + "</b><small>" + pct(d, ORDER.length) + "% of the syllabus</small></div>" +
+      '<div class="kpi"><span>Day streak</span><b>' + streak() + "</b><small>Best: " + bestStreak() + " days</small></div>" +
+      '<div class="kpi"><span>Flashcards mastered</span><b>' + mastered + " / " + totalCards + "</b><small>" + reviewed + " reviewed at least once</small></div>" +
+      '<div class="kpi"><span>Reading completed</span><b>' + Math.round(mins / 6) / 10 + " h</b><small>Estimated from note lengths</small></div></div>";
+
+    html += '<section class="block"><div class="block-head"><div><h2>Activity</h2><p>Each square is a day; completing a note or rating a flashcard counts. Keep the streak alive with one action a day.</p></div></div>' +
+      '<div class="card">' + heatmap(26) + "</div></section>";
+
+    html += '<div class="grid c2 block">' +
+      '<section><div class="block-head"><div><h2>Saved for later</h2><p>' + savedList.length + ' notes bookmarked.</p></div></div>' +
+      miniList(savedList, "Nothing saved yet. Use " + icon("bookmark") + " Save for later on any note.", function (s) { return "Saved " + fmtDate(saved[s]); }) + "</section>" +
+      '<section><div class="block-head"><div><h2>Recently completed</h2><p>Your last finished notes.</p></div></div>' +
+      miniList(recent, "No notes completed yet. Start with the <a href=\"" + noteHref("00-start-here/01-interview-framework") + "\">interview playbook</a>.",
+        function (s) { return +done[s] > 1 ? "Completed " + fmtDate(done[s]) : "Completed"; }) + "</section></div>";
+
+    html += '<section class="block"><div class="block-head"><div><h2>By section</h2><p>Where you are strong and what is left.</p></div></div><div class="sec-progress">' +
+      DATA.sections.map(function (s) {
+        var c = doneCount(s.notes);
+        return '<a href="#/section/' + s.id + '">' + icon(SECTION_ICON[s.id] || "book") + "<span>" + esc(s.title) + "</span>" + progressBar(c, s.notes.length) + "<b>" + c + "/" + s.notes.length + "</b></a>";
+      }).join("") + "</div></section>";
+
+    if (memos.length) {
+      html += '<section class="block"><div class="block-head"><div><h2>My notes</h2><p>Personal notes you wrote on ' + memos.length + " topics.</p></div></div>" +
+        miniList(memos, "", function (s) { var t = memo[s].replace(/\s+/g, " ").trim(); return esc(t.length > 140 ? t.slice(0, 140) + "..." : t); }) + "</section>";
+    }
+
+    html += '<section class="block"><div class="block-head"><div><h2>Your data</h2><p>Back up your progress, move it to another browser, or start fresh.</p></div></div>' +
+      '<div class="card data-actions"><div class="data-row"><div><h3>Export backup</h3><p>Download a small JSON file with your name, completed notes, flashcard boxes, bookmarks, notes and streak.</p></div>' +
+      '<button class="btn primary" id="exportBtn">' + icon("download") + " Export</button></div>" +
+      '<div class="data-row"><div><h3>Import backup</h3><p>Load a file exported from Blueprint 101 on another browser or device. It replaces the progress here.</p></div>' +
+      '<button class="btn" id="importBtn">' + icon("upload") + ' Import</button><input type="file" id="importFile" accept="application/json,.json" hidden></div>' +
+      '<div class="data-row"><div><h3>Reset progress</h3><p>Erase your name, progress, flashcards, bookmarks and notes from this browser. Theme and layout preferences stay.</p></div>' +
+      '<button class="btn danger" id="resetBtn">' + icon("trash") + " Reset</button></div>" +
+      '<div id="dataMsg" role="status" aria-live="polite"></div></div></section>';
+    page(html);
+
+    document.getElementById("nameForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      saveProfile(document.getElementById("nameInput").value);
+      route();
+    });
+    document.getElementById("exportBtn").addEventListener("click", exportData);
+    document.getElementById("importBtn").addEventListener("click", function () { document.getElementById("importFile").click(); });
+    document.getElementById("importFile").addEventListener("change", function (e) {
+      var f = e.target.files && e.target.files[0];
+      if (f) importData(f);
+      e.target.value = "";
+    });
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      if (!window.confirm("Erase all progress, flashcards, bookmarks and notes from this browser? Export a backup first if you might want them back.")) return;
+      USER_KEYS.forEach(store.del);
+      loadState(); paintAvatar(); route();
+    });
+    var ps = document.getElementById("persistState");
+    if (ps && navigator.storage && navigator.storage.persisted) {
+      navigator.storage.persisted().then(function (on) {
+        if (on) ps.textContent = "This browser has also marked the data as persistent, so it will not be evicted to free space.";
+      }).catch(function () { /* ignore */ });
+    }
+  }
+
+  function dataMsg(kind, text) {
+    var m = document.getElementById("dataMsg");
+    if (m) m.innerHTML = '<div class="callout ' + kind + '" style="margin-top:14px">' + esc(text) + "</div>";
+  }
+
+  function exportData() {
+    var data = {};
+    USER_KEYS.forEach(function (k) { var v = store.get(k, null); if (v !== null) data[k] = v; });
+    var json = JSON.stringify({ app: "blueprint-101", version: 1, exported: new Date().toISOString(), data: data }, null, 2);
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+    a.download = "blueprint-101-progress-" + dayKey(new Date()) + ".json";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+    dataMsg("good", "Backup downloaded. Keep the file somewhere safe, then use Import on any other browser to continue there.");
+  }
+
+  // keep only well-formed values for notes that exist, so a hand-edited or old file cannot break the app
+  function cleanBackup(obj) {
+    if (!obj || obj.app !== "blueprint-101" || typeof obj.data !== "object" || !obj.data) throw new Error("This is not a Blueprint 101 backup file.");
+    var src = obj.data, out = {};
+    function map(o, keyOk, val) {
+      var r = {};
+      if (o && typeof o === "object") Object.keys(o).forEach(function (k) { if (keyOk(k)) { var v = val(o[k]); if (v !== undefined) r[k] = v; } });
+      return r;
+    }
+    var isNote = function (k) { return !!DATA.notes[k]; };
+    var stamp = function (v) { return typeof v === "number" && isFinite(v) ? v : v ? 1 : undefined; };
+    if (src.profile && typeof src.profile === "object") out.profile = { name: String(src.profile.name || "").slice(0, 40), since: String(src.profile.since || new Date().toISOString()) };
+    out.done = map(src.done, isNote, stamp);
+    out.saved = map(src.saved, isNote, stamp);
+    out.memo = map(src.memo, isNote, function (v) { return typeof v === "string" && v.trim() ? v.slice(0, 20000) : undefined; });
+    out.boxes = map(src.boxes, function (k) { var m = k.match(/^(.+)#\d+$/); return !!(m && DATA.notes[m[1]]); },
+      function (v) { v = parseInt(v, 10); return v >= 1 && v <= 5 ? v : undefined; });
+    out.activity = map(src.activity, function (k) { return /^\d{4}-\d\d-\d\d$/.test(k); },
+      function (v) { v = parseInt(v, 10); return v > 0 ? Math.min(v, 1000) : undefined; });
+    if (isNote(src.last)) out.last = src.last;
+    return out;
+  }
+
+  function importData(file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var data;
+      try { data = cleanBackup(JSON.parse(reader.result)); } catch (e) { return dataMsg("bad", e instanceof SyntaxError ? "That file is not valid JSON." : e.message); }
+      var n = Object.keys(data.done).length;
+      if (!window.confirm("Replace the progress in this browser with this backup (" + n + " notes completed" + (data.profile && data.profile.name ? ", " + data.profile.name : "") + ")?")) return;
+      USER_KEYS.forEach(function (k) { if (data[k] !== undefined) store.set(k, data[k]); else store.del(k); });
+      loadState(); paintAvatar(); route();
+      dataMsg("good", "Backup imported: " + n + " completed notes restored.");
+    };
+    reader.onerror = function () { dataMsg("bad", "Could not read that file."); };
+    reader.readAsText(file);
+  }
+
   function notFound() {
     page('<div class="page-head"><h1>Not found</h1><p>That page does not exist. <a href="#/">Back to Get started</a>.</p></div>');
   }
@@ -566,6 +845,27 @@
   });
   paintThemeBtn();
 
+  function paintAvatar() {
+    var b = document.getElementById("meBtn");
+    if (!b) return;
+    var ini = initials();
+    b.innerHTML = ini ? '<span class="avatar">' + esc(ini) + "</span>" : icon("user");
+    b.setAttribute("aria-label", profile && profile.name ? profile.name + ": your progress" : "Your progress");
+    b.title = profile && profile.name ? profile.name : "Your progress";
+  }
+  paintAvatar();
+
+  // another tab changed our data: reload it and redraw, unless the learner is typing here
+  window.addEventListener("storage", function (e) {
+    if (e.key === "bp-theme" && e.newValue) { document.documentElement.setAttribute("data-theme", e.newValue); paintThemeBtn(); return; }
+    if (e.key !== null && String(e.key).indexOf("bp-") !== 0) return;
+    loadState(); paintAvatar();
+    var a = document.activeElement;
+    if (a && /input|textarea/i.test(a.tagName)) return;
+    if (/^#\/flashcards/.test(location.hash)) return;                 // keep the current card in place
+    var y = window.scrollY; route(); window.scrollTo(0, y);
+  });
+
   // ------------------------------------------------------------ router
   function route() {
     if (window.Labs && window.Labs._stop) window.Labs._stop();
@@ -583,6 +883,7 @@
     else if ((m = h.match(/^plan\/(.+)$/))) { r.key = "plans"; renderPlan(m[1]); }
     else if ((m = h.match(/^company\/(.+)$/))) { r.key = "plans"; renderCompany(m[1]); }
     else if ((m = h.match(/^flashcards(?:\/(.+))?$/))) { r.key = "flashcards"; renderFlashcards(m[1]); }
+    else if (h === "profile") renderProfile();
     else if (h === "diagrams") renderDiagrams();
     else if (h === "labs") renderLabs();
     else if ((m = h.match(/^lab\/(.+)$/))) { r.key = "labs"; renderLab(m[1]); }
