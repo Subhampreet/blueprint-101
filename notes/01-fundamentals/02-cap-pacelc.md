@@ -9,6 +9,12 @@ lab: quorum
 
 # CAP, PACELC and Consistency Models
 
+> **TL;DR**
+> - CAP: during a network partition you must choose between consistency (refuse some requests) and availability (answer, maybe stale).
+> - PACELC adds the everyday case: even without partitions you trade latency for consistency.
+> - Consistency is a spectrum, from linearizable to eventual, with cheap session guarantees like read-your-writes in between.
+> - Use strong consistency for the few invariants that need it (money, uniqueness) and eventual consistency elsewhere.
+
 ## CAP theorem
 
 For a distributed data store that replicates data across nodes, during a **network partition** you can guarantee at most one of:

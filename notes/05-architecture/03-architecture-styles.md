@@ -8,6 +8,12 @@ time: 25 min
 
 # Architecture Styles
 
+> **TL;DR**
+> - Layered, hexagonal (ports and adapters) and clean architecture organize code inside a service; dependencies point inward to the domain.
+> - Hexagonal design makes business logic testable with in-memory fakes and lets you swap technology at the edges.
+> - Serverless runs code without servers and scales to zero; watch cold starts, time limits and DB connections.
+> - Serverless fits spiky and glue workloads; steady high-volume traffic is usually cheaper on containers.
+
 Two different questions often get mixed up:
 
 1. **How is the code inside one service organized?** Layered, hexagonal, clean, onion, MVC.

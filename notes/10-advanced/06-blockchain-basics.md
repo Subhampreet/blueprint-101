@@ -8,6 +8,12 @@ time: 15 min
 
 # Blockchain and Distributed Ledgers
 
+> **TL;DR**
+> - A blockchain is an append-only, hash-linked ledger replicated across parties that do not trust each other.
+> - Consensus (proof of work, proof of stake, BFT) decides which blocks everyone accepts.
+> - Smart contracts are programs every validator executes deterministically.
+> - Throughput is limited by design; Layer 2 rollups and sharding scale it. If you trust one operator, use a database.
+
 Rarely a core interview topic for product companies, but worth understanding as an extreme point in the distributed systems design space: **consensus among mutually distrusting parties**.
 
 ## Architecture

@@ -8,6 +8,12 @@ time: 35 min
 
 # Design Search Autocomplete (and the Search Engine Behind It)
 
+> **TL;DR**
+> - Typeahead needs suggestions within tens of milliseconds on every keystroke, so precompute them.
+> - Build a trie (or prefix table) with the top-k completions stored at each prefix, offline from query logs.
+> - Cache at the client and CDN, debounce keystrokes, shard by prefix, and merge a small trending layer in real time.
+> - A full search engine adds crawling, inverted indexes and multi-stage ranking on top.
+
 ## 1. Requirements
 
 **Functional**: as the user types, show the top 5 to 10 suggestions for the prefix, ranked by popularity (and optionally freshness and personalization). Suggestions update as query trends change.

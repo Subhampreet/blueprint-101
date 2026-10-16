@@ -8,6 +8,12 @@ time: 35 min
 
 # Machine Learning in System Design and MLOps
 
+> **TL;DR**
+> - The model is one box; the system around it is data, features, training, serving, monitoring and experiments.
+> - Feature stores keep training and serving features identical, avoiding training/serving skew.
+> - Recommenders are funnels: retrieve candidates cheaply, rank with a heavy model, then re-rank for diversity and rules.
+> - Monitor drift, validate with A/B tests, and roll out models like code (shadow, canary, rollback).
+
 Product companies increasingly ask "design the recommendation system" or "how would you serve this model". The ML model is a small box; the system around it is the interview.
 
 ![ML platform](../../assets/diagrams/ml-platform.svg)

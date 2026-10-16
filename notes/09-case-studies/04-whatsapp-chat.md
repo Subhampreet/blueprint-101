@@ -8,6 +8,12 @@ time: 45 min
 
 # Design a Chat System (WhatsApp, Slack, Discord)
 
+> **TL;DR**
+> - Persistent connections live on gateways; a registry knows which gateway holds each user.
+> - Persist before acknowledging, assign per-conversation sequence numbers, and dedupe retries by client message id.
+> - Receipts move a message from sent to delivered to read; offline users get push notifications and sync by cursor.
+> - Small groups fan out on write; huge channels store once and fan out on read.
+
 ## 1. Requirements
 
 **Functional**

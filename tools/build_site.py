@@ -33,7 +33,8 @@ SECTIONS = {
     "09-case-studies": ("Case Studies", "Full interview walkthroughs of real products"),
     "10-advanced": ("Advanced Topics", "Consensus, clocks, streaming, sketches, geo, ML systems"),
     "11-builds": ("Builds", "From-scratch implementations you can run"),
-    "12-resources": ("Resources", "Books, papers, blogs and the source repos"),
+    "12-practice": ("Practice", "Estimation, database, networking and cost drills plus a question bank"),
+    "13-resources": ("Resources", "Books, papers, blogs and the source repos"),
 }
 
 LABS = {
@@ -56,6 +57,7 @@ CORE_WEEK = [
     "02-building-blocks/07-message-queues", "02-building-blocks/08-rate-limiting", "03-data/04-replication",
     "03-data/05-sharding-partitioning", "04-networking-apis/03-api-design", "09-case-studies/01-url-shortener",
     "09-case-studies/02-twitter-news-feed", "09-case-studies/04-whatsapp-chat", "09-case-studies/08-notification-system",
+    "12-practice/01-estimation-problems",
 ]
 CORE_MONTH = CORE_WEEK + [
     "01-fundamentals/01-what-is-system-design", "01-fundamentals/04-availability-reliability", "02-building-blocks/01-dns",
@@ -69,13 +71,16 @@ CORE_MONTH = CORE_WEEK + [
     "09-case-studies/05-youtube-netflix", "09-case-studies/06-uber-ride-hailing", "09-case-studies/07-dropbox-google-drive",
     "09-case-studies/10-payment-system", "09-case-studies/11-ecommerce-flash-sale", "09-case-studies/12-typeahead-autocomplete",
     "11-builds/01-lru-cache", "11-builds/02-rate-limiters",
+    "01-fundamentals/05-hld-process", "04-networking-apis/06-communication-patterns", "05-architecture/04-cloud-integration-patterns",
+    "08-lld/05-database-schema-design", "08-lld/06-api-and-service-integration", "09-case-studies/16-authentication-system",
+    "11-builds/08-mini-url-shortener", "12-practice/02-database-optimization-challenges", "12-practice/05-design-question-bank",
 ]
 
 PLANS = [
     {"id": "1-week", "title": "1 Week", "schedule": "2 hours daily", "notes": CORE_WEEK,
-     "blurb": "The highest-yield concepts plus the four designs asked most often. For an interview next week."},
+     "blurb": "The highest-yield concepts, the four designs asked most often and an estimation drill. For an interview next week."},
     {"id": "1-month", "title": "1 Month", "schedule": "6 hours weekly", "notes": CORE_MONTH,
-     "blurb": "All-round coverage of building blocks, data, APIs, reliability and eleven case studies."},
+     "blurb": "All-round coverage: the HLD process, building blocks, data, APIs, reliability, twelve case studies and practice drills."},
     {"id": "3-months", "title": "3 Months", "schedule": "6 hours weekly", "notes": None,
      "blurb": "Everything in the repo, including LLD, advanced topics and every from-scratch build."},
 ]
@@ -83,21 +88,28 @@ PLANS = [
 # practice sets built around the products each company is known for
 COMPANIES = [
     ("meta", "Meta", "#0866ff", ["09-case-studies/02-twitter-news-feed", "09-case-studies/03-instagram", "09-case-studies/04-whatsapp-chat",
-                                 "09-case-studies/12-typeahead-autocomplete", "09-case-studies/13-distributed-cache", "09-case-studies/15-ad-click-aggregator"]),
+                                 "09-case-studies/12-typeahead-autocomplete", "09-case-studies/13-distributed-cache", "09-case-studies/15-ad-click-aggregator",
+                                 "09-case-studies/17-recommendation-engine", "09-case-studies/18-ad-server"]),
     ("google", "Google", "#ea4335", ["09-case-studies/09-google-docs", "09-case-studies/05-youtube-netflix", "09-case-studies/12-typeahead-autocomplete",
-                                     "09-case-studies/14-web-crawler", "10-advanced/01-consensus-and-clocks", "02-building-blocks/10-object-storage-and-search"]),
+                                     "09-case-studies/14-web-crawler", "10-advanced/01-consensus-and-clocks", "02-building-blocks/10-object-storage-and-search",
+                                     "09-case-studies/19-search-engine", "09-case-studies/18-ad-server"]),
     ("amazon", "Amazon", "#ff9900", ["09-case-studies/11-ecommerce-flash-sale", "09-case-studies/10-payment-system", "09-case-studies/08-notification-system",
-                                     "03-data/04-replication", "02-building-blocks/07-message-queues", "09-case-studies/01-url-shortener"]),
+                                     "03-data/04-replication", "02-building-blocks/07-message-queues", "09-case-studies/01-url-shortener",
+                                     "09-case-studies/17-recommendation-engine"]),
     ("uber", "Uber", "#16a34a", ["09-case-studies/06-uber-ride-hailing", "10-advanced/04-geospatial-indexing", "04-networking-apis/04-realtime-communication",
                                  "09-case-studies/10-payment-system", "10-advanced/02-stream-batch-processing"]),
     ("netflix", "Netflix", "#e50914", ["09-case-studies/05-youtube-netflix", "02-building-blocks/04-cdn", "06-reliability-ops/01-resilience-patterns",
-                                       "06-reliability-ops/02-observability", "06-reliability-ops/03-disaster-recovery-multi-region"]),
+                                       "06-reliability-ops/02-observability", "06-reliability-ops/03-disaster-recovery-multi-region",
+                                       "09-case-studies/17-recommendation-engine"]),
     ("stripe", "Stripe", "#635bff", ["09-case-studies/10-payment-system", "03-data/06-distributed-transactions", "02-building-blocks/08-rate-limiting",
-                                     "04-networking-apis/03-api-design", "07-security/02-encryption-data-network-security"]),
+                                     "04-networking-apis/03-api-design", "07-security/02-encryption-data-network-security",
+                                     "08-lld/06-api-and-service-integration"]),
     ("microsoft", "Microsoft", "#00a4ef", ["09-case-studies/09-google-docs", "09-case-studies/04-whatsapp-chat", "07-security/01-authn-authz",
-                                           "05-architecture/01-monolith-vs-microservices", "09-case-studies/13-distributed-cache"]),
+                                           "05-architecture/01-monolith-vs-microservices", "09-case-studies/13-distributed-cache",
+                                           "09-case-studies/16-authentication-system"]),
     ("linkedin", "LinkedIn", "#0a66c2", ["09-case-studies/02-twitter-news-feed", "09-case-studies/12-typeahead-autocomplete", "09-case-studies/08-notification-system",
-                                         "10-advanced/02-stream-batch-processing", "10-advanced/05-ml-system-design"]),
+                                         "10-advanced/02-stream-batch-processing", "10-advanced/05-ml-system-design",
+                                         "09-case-studies/19-search-engine", "09-case-studies/17-recommendation-engine"]),
     ("airbnb", "Airbnb", "#ff385c", ["09-case-studies/11-ecommerce-flash-sale", "09-case-studies/10-payment-system", "10-advanced/04-geospatial-indexing",
                                      "02-building-blocks/10-object-storage-and-search", "03-data/06-distributed-transactions"]),
     ("dropbox", "Dropbox", "#0061fe", ["09-case-studies/07-dropbox-google-drive", "02-building-blocks/10-object-storage-and-search",
@@ -105,7 +117,8 @@ COMPANIES = [
     ("slack", "Slack / Discord", "#7c3aed", ["09-case-studies/04-whatsapp-chat", "04-networking-apis/04-realtime-communication",
                                              "02-building-blocks/07-message-queues", "03-data/05-sharding-partitioning", "09-case-studies/08-notification-system"]),
     ("atlassian", "Atlassian", "#0052cc", ["09-case-studies/09-google-docs", "05-architecture/01-monolith-vs-microservices", "03-data/05-sharding-partitioning",
-                                           "07-security/01-authn-authz", "06-reliability-ops/04-deployment-and-cost"]),
+                                           "07-security/01-authn-authz", "06-reliability-ops/04-deployment-and-cost",
+                                           "09-case-studies/16-authentication-system"]),
     ("flipkart", "Flipkart", "#2874f0", ["09-case-studies/11-ecommerce-flash-sale", "09-case-studies/10-payment-system", "02-building-blocks/03-caching",
                                          "02-building-blocks/08-rate-limiting", "09-case-studies/12-typeahead-autocomplete"]),
     ("swiggy", "Swiggy / Zomato", "#fc8019", ["09-case-studies/06-uber-ride-hailing", "10-advanced/04-geospatial-indexing", "09-case-studies/08-notification-system",

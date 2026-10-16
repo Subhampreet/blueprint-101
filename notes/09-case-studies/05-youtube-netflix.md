@@ -8,6 +8,12 @@ time: 40 min
 
 # Design YouTube / Netflix
 
+> **TL;DR**
+> - Upload in resumable chunks, then transcode in parallel into a ladder of renditions and package them for adaptive streaming.
+> - Players switch quality per segment based on bandwidth and buffer; segments are static files cached by CDNs.
+> - Netflix pre-positions content inside ISPs; YouTube relies more on pull-through caching for its long tail.
+> - Views are counted from deduplicated event streams; recommendations drive most watch time.
+
 Two flavours of the same problem:
 
 - **YouTube**: user generated content, huge upload volume, long tail, many viewers per popular video.

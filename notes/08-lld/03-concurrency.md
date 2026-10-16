@@ -8,6 +8,12 @@ time: 35 min
 
 # Concurrency and Parallelism
 
+> **TL;DR**
+> - Concurrency is structuring many tasks at once; parallelism is running them simultaneously on multiple cores.
+> - Race conditions come from unsynchronized read-modify-write and check-then-act; fix with locks, atomics or a single owner.
+> - Deadlocks need four conditions; break circular wait by locking in a global order.
+> - Bounded queues and thread pools provide backpressure instead of unbounded memory growth.
+
 - **Concurrency**: dealing with many things at once (structuring a program as independently progressing tasks; they may interleave on one core).
 - **Parallelism**: doing many things at once (tasks literally run simultaneously on multiple cores).
 

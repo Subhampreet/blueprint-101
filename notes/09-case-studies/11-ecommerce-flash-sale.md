@@ -8,6 +8,12 @@ time: 45 min
 
 # Design an E-commerce Platform (and a Flash Sale)
 
+> **TL;DR**
+> - Catalog and search can be eventually consistent; inventory reservation and payments must be strongly consistent.
+> - Prevent overselling with atomic conditional decrements and reservations with expiry.
+> - Survive flash sales with a static CDN page, a waiting room, a Redis stock gate and queued order creation.
+> - Carts favour availability; checkout favours correctness, using sagas with compensations.
+
 ## 1. Requirements
 
 **Functional**: browse and search a product catalog; product detail pages with price and availability; cart; checkout (address, payment); order tracking; inventory management across warehouses; recommendations; reviews. **Flash sale**: limited stock (e.g. 10,000 phones) released at a fixed time to millions of users.

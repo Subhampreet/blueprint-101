@@ -8,6 +8,12 @@ time: 20 min
 
 # Geospatial Indexing
 
+> **TL;DR**
+> - Plain latitude and longitude indexes cannot answer "what is nearby?" efficiently; map 2D space to cells.
+> - Geohash prefixes are simple (search the cell plus 8 neighbours); quadtrees adapt to density.
+> - S2 and H3 offer better cell shapes; H3 hexagons suit aggregation and ride hailing.
+> - Keep fast-moving points (drivers) in memory and static places (restaurants) in an index.
+
 "Find restaurants within 2 km", "nearest 10 drivers", "which delivery zone is this address in" all need **proximity queries**. A B-tree index on `latitude` and another on `longitude` does not help much: each one-dimensional range matches a huge strip of the planet, and intersecting them is expensive. We need to map 2D space to something indexable.
 
 ## Geohash

@@ -8,6 +8,12 @@ time: 30 min
 
 # Event-Driven Architecture, CQRS and Event Sourcing
 
+> **TL;DR**
+> - Event-driven systems communicate through facts ("OrderPlaced"), so producers and consumers stay decoupled.
+> - CQRS separates the write model from read models shaped for each query; reads are eventually consistent.
+> - Event sourcing stores every change as an event and rebuilds state by replaying them: full audit and time travel, at a complexity cost.
+> - Most systems need events and maybe CQRS; few need full event sourcing.
+
 ## Event-driven architecture (EDA)
 
 Components communicate by producing and reacting to **events**: immutable facts about something that happened (`OrderPlaced`, `PaymentFailed`, `UserSignedUp`).

@@ -8,6 +8,12 @@ time: 15 min
 
 # Serialization and Compression
 
+> **TL;DR**
+> - JSON is readable but large; Protobuf and Avro are compact binary formats with schemas.
+> - Schemas must evolve safely: add optional fields, never reuse field numbers, use a schema registry for events.
+> - Compress text over the network (Brotli for static, gzip/zstd for dynamic); LZ4/Snappy where speed matters most.
+> - Do not compress already-compressed media.
+
 Every byte you send or store is paid for in latency, bandwidth, CPU and money. Format choice also determines how safely you can **evolve** data over time.
 
 ## Serialization formats

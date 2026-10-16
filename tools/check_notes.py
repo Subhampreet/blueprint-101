@@ -43,6 +43,10 @@ def main():
         for key in REQUIRED:
             if not meta.get(key):
                 problems.append("%s: front matter missing '%s'" % (rel, key))
+        if " - " in meta.get("summary", ""):
+            problems.append("%s: summary uses ' - ' as a separator (use a colon, commas or parentheses)" % rel)
+        if "> **TL;DR**" not in text:
+            problems.append("%s: missing the '> **TL;DR**' box under the title" % rel)
         body = re.sub(r"```.*?```", "", text, flags=re.S)       # ignore code blocks
         for target in LINK.findall(body):
             if re.match(r"^[a-z]+:", target) or target.startswith("#"):

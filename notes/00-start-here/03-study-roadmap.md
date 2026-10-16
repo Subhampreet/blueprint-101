@@ -8,6 +8,11 @@ time: 10 min
 
 # Study Roadmap
 
+> **TL;DR**
+> - Ten weeks in six phases: foundations, building blocks, data, architecture and reliability, case studies, LLD and advanced.
+> - Each phase ends with something you can do, using labs, builds and practice drills alongside the notes.
+> - Attempt every case study yourself before reading it, then fill the gaps you found.
+
 About 8 to 10 hours a week for 10 weeks. Each phase ends with something you can **do**, not just something you read. Track progress with the checkboxes in the interactive site (they persist in your browser).
 
 ## Phase 1: Foundations (Weeks 1 to 2)
@@ -80,7 +85,7 @@ Do each one **yourself first** (45 minutes, timer on, talk out loud or write), t
 - LLD: [OOP and SOLID](../08-lld/01-oop-solid-principles.md), [Design Patterns](../08-lld/02-design-patterns.md), [Concurrency](../08-lld/03-concurrency.md), [Parking Lot](../08-lld/04-lld-parking-lot.md).
 - Advanced: [Consensus and Clocks](../10-advanced/01-consensus-and-clocks.md), [Stream and Batch](../10-advanced/02-stream-batch-processing.md), [Probabilistic Structures](../10-advanced/03-probabilistic-data-structures.md) ([Bloom build](../11-builds/04-bloom-filter.md)), [Geospatial](../10-advanced/04-geospatial-indexing.md), [ML Systems](../10-advanced/05-ml-system-design.md), [Blockchain](../10-advanced/06-blockchain-basics.md).
 - Daily: 15 minutes of **Flashcards** in the site (every note's interview questions become cards).
-- Weekly: one mock interview with a peer; read one engineering blog post or paper from [Resources](../12-resources/01-resources.md).
+- Weekly: one mock interview with a peer; read one engineering blog post or paper from [Resources](../13-resources/01-resources.md).
 
 ## The week before an interview
 

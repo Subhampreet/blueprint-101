@@ -8,6 +8,12 @@ time: 25 min
 
 # Scalability, Latency and Throughput
 
+> **TL;DR**
+> - Latency is how long one request takes; throughput is how many finish per second. Batching usually raises both throughput and latency.
+> - Little's law (in-flight = throughput x latency) sizes thread pools and connection pools.
+> - Watch percentiles (p99), not averages; fanout turns rare slow calls into common slow pages.
+> - Scale up first, scale out when you must; stateless services make scaling out easy.
+
 ## Latency vs throughput
 
 - **Latency**: how long one operation takes, from the caller's perspective. Measured in ms.

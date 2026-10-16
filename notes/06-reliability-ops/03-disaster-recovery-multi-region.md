@@ -8,6 +8,12 @@ time: 25 min
 
 # Disaster Recovery and Multi-Region
 
+> **TL;DR**
+> - RTO is how long you can be down; RPO is how much data you can lose. Both are business decisions with cost curves.
+> - Replication is not a backup: it copies mistakes too. Keep point-in-time and immutable backups and test restores.
+> - DR strategies range from backup-and-restore (cheap, slow) to active-active (fast, expensive).
+> - Multi-region is hard because of data: decide what needs strong consistency and how conflicts resolve.
+
 High availability handles **routine** failures (an instance, a disk, an AZ). Disaster recovery (DR) handles **rare, large** ones: a region outage, a ransomware attack, an operator deleting a production database, a bad migration corrupting data.
 
 ## RTO and RPO

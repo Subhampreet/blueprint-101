@@ -8,6 +8,12 @@ time: 15 min
 
 # What is System Design
 
+> **TL;DR**
+> - System design decides which components exist, how they talk, and where data lives, under real constraints.
+> - HLD draws the city (services, stores, queues); LLD draws one building (classes, schemas, code).
+> - Functional requirements say what the system does; non-functional requirements (latency, scale, availability, consistency) shape how it is built.
+> - Every choice buys something and costs something; name both halves.
+
 System design is the process of deciding **which components a system needs, how they talk to each other, and where the data lives**, so the system meets its functional goals under real constraints: scale, latency, cost, failures, team size and time.
 
 In interviews it splits into two related skills:

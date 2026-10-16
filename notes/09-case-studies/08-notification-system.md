@@ -8,6 +8,12 @@ time: 35 min
 
 # Design a Notification System
 
+> **TL;DR**
+> - One API accepts notifications, applies preferences, quiet hours, templates and dedupe, then fans out per channel.
+> - Separate queues per channel and priority so OTPs are never stuck behind marketing campaigns.
+> - Idempotency keys and per-channel delivery records prevent duplicate sends; retries and DLQs handle provider failures.
+> - Provider rate limits and failover are the real bottlenecks, not your own throughput.
+
 ## 1. Requirements
 
 **Functional**

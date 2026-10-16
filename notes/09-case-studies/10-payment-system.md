@@ -8,6 +8,12 @@ time: 45 min
 
 # Design a Payment System
 
+> **TL;DR**
+> - Correctness beats speed: never double-charge, never lose a payment, audit everything.
+> - Idempotency keys at every hop plus a state machine make retries safe; unknown outcomes are resolved, not guessed.
+> - A double-entry, append-only ledger is the financial source of truth.
+> - Daily reconciliation with provider reports catches whatever the real-time path missed.
+
 Payments are the canonical **correctness over everything** problem. Latency matters, but losing or duplicating money is unacceptable.
 
 ## 1. Requirements

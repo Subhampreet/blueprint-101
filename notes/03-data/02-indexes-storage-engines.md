@@ -8,6 +8,12 @@ time: 30 min
 
 # Indexes, Storage Engines and Query Optimization
 
+> **TL;DR**
+> - B-trees update data in place and read fast; LSM trees append writes and compact later, favouring write-heavy workloads.
+> - Composite index order matters: equality columns first, then range, then sort.
+> - Every index speeds some reads and slows every write; index for real queries only.
+> - Read EXPLAIN plans, fix N+1 queries and replace deep OFFSET pagination with keyset pagination.
+
 ## Storage engines: B-tree vs LSM-tree
 
 ![B-tree vs LSM](../../assets/diagrams/btree-vs-lsm.svg)

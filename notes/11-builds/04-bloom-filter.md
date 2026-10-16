@@ -8,6 +8,11 @@ time: 15 min
 
 # Build: Bloom Filter
 
+> **TL;DR**
+> - Size the bit array and hash count from the expected item count and target false positive rate.
+> - Double hashing derives k positions from one digest; about 10 bits per item gives 1% false positives.
+> - No false negatives, ever; deletes need a counting variant.
+
 Theory: [Probabilistic Data Structures](../10-advanced/03-probabilistic-data-structures.md#bloom-filter-have-i-seen-this).
 
 ## Code

@@ -9,6 +9,12 @@ lab: load-balancer
 
 # Load Balancing
 
+> **TL;DR**
+> - A load balancer gives clients one address in front of many healthy servers, enabling scaling, failover and zero-downtime deploys.
+> - L4 balances connections (fast, protocol-agnostic); L7 understands HTTP and can route by path, header or cookie.
+> - Algorithms matter: round robin ignores load; least connections and power of two choices adapt to slow servers.
+> - Health checks remove bad servers, but a shared-dependency check can remove all of them; keep liveness shallow.
+
 A load balancer (LB) spreads incoming requests across a pool of backends so that no single server is overwhelmed, and hides failed servers from clients. It gives you **one stable address** in front of a **changing set of healthy servers**, which is what makes horizontal scaling and zero downtime deploys possible.
 
 ![Load balancer overview](../../assets/diagrams/lb-overview.svg)
@@ -22,6 +28,18 @@ What an LB buys you:
 - **Traffic control**: canaries, blue/green, A/B, routing by path or header.
 
 LBs appear at many tiers: in front of web servers, between services, in front of databases (ProxySQL, PgBouncer), and globally across regions.
+
+## Hardware vs software load balancers
+
+| | Hardware appliances | Software load balancers | Managed cloud LBs |
+|---|---|---|---|
+| Examples | F5 BIG-IP, Citrix ADC (NetScaler) | NGINX, HAProxy, Envoy, Traefik | AWS ALB/NLB, GCP Cloud Load Balancing, Azure LB |
+| Performance | Very high, dedicated ASICs | High on commodity servers, scale horizontally | Scales automatically |
+| Cost model | Large upfront cost, licenses | Free/open source plus servers | Pay per hour and per traffic unit |
+| Flexibility | Vendor features, slower to change | Fully programmable, config as code, runs anywhere (including Kubernetes) | Integrated with cloud services, less control |
+| Where you see them | Traditional data centers, banks | Everywhere, including inside service meshes | Default choice in the cloud |
+
+Modern systems mostly use managed cloud LBs at the edge and software proxies (Envoy, NGINX) inside. Hyperscalers build their own software L4 balancers on commodity hardware (Google Maglev, Meta Katran).
 
 ## Layer 4 vs Layer 7
 
@@ -69,9 +87,9 @@ Design your health endpoint carefully:
 
 **Connection draining** (deregistration delay): when removing a server, stop sending new requests but let in-flight ones finish (30 to 300 s).
 
-## Sticky sessions (session affinity)
+## Sticky sessions (session affinity and session persistence)
 
-Route a given client to the same backend every time, via a cookie inserted by the LB or a hash of IP / header.
+**Session persistence** (also called sticky sessions or session affinity) routes a given client to the same backend every time, via a cookie inserted by the LB or a hash of IP / header.
 
 - Pros: works with legacy apps that keep session state in memory; improves local cache hit rates.
 - Cons: uneven load, lost sessions when a server dies, harder scaling down and deploys.

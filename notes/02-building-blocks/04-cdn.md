@@ -8,6 +8,12 @@ time: 20 min
 
 # Content Delivery Networks (CDN)
 
+> **TL;DR**
+> - A CDN is a global network of caches near users: lower latency, less origin load, cheaper egress, DDoS absorption.
+> - Pull CDNs fetch on the first miss; push CDNs are loaded ahead of time for large, predictable content.
+> - Version asset URLs (content hashes) and cache them forever; keep the HTML entry point short-lived.
+> - Video and images are where CDNs earn the most: adaptive bitrate segments and right-sized modern formats.
+
 A CDN is a globally distributed network of caching proxy servers (**edge servers**) grouped into **Points of Presence (PoPs)**, placed close to users. Users fetch content from a nearby PoP instead of your **origin**. Benefits:
 
 - **Latency**: 10 to 30 ms to a nearby PoP instead of 150+ ms across an ocean, and TLS handshakes terminate close to the user.

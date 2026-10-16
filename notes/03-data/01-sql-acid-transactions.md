@@ -8,6 +8,12 @@ time: 35 min
 
 # Relational Databases, ACID and Transactions
 
+> **TL;DR**
+> - Relational databases give constraints, joins and ACID transactions; they are the right default for most product data.
+> - Isolation levels trade safety for concurrency; know dirty reads, lost updates and write skew.
+> - Prevent races with atomic conditional updates, row locks or optimistic versions, and lock in a consistent order to avoid deadlocks.
+> - Normalize the write model, denormalize read paths deliberately, and migrate schemas with expand and contract.
+
 Relational databases (PostgreSQL, MySQL, SQL Server, Oracle) store data in tables with a fixed schema, enforce constraints, support joins and ad hoc SQL, and give you **transactions**. They remain the right default for most product data. Choose something else only when a specific requirement (scale pattern, data shape, latency) demands it.
 
 ## ACID
@@ -118,6 +124,19 @@ Use **expand and contract**:
 4. Contract: stop writing the old column, then drop it later.
 
 Avoid long table locks: add indexes `CONCURRENTLY` (Postgres), use online schema change tools (gh-ost, pt-online-schema-change) for MySQL.
+
+## Common SQL databases
+
+| Database | Strengths | Watch out for | Typical users |
+|---|---|---|---|
+| **PostgreSQL** | Rich SQL, strong correctness, JSONB, extensions (PostGIS, pgvector, Citus), great MVCC | Vacuum and bloat management, process-per-connection (use a pooler) | Default choice for new product backends |
+| **MySQL / MariaDB** | Simple, fast for read-heavy OLTP, huge ecosystem, mature replication, Vitess for sharding | Weaker SQL feature set historically, InnoDB clustered PK design matters | Web giants (Meta, Shopify, GitHub via Vitess) |
+| **Oracle** | Enterprise features (RAC clustering, partitioning, advanced security), strong tooling | Licensing cost, vendor lock-in | Banks, telcos, large enterprises |
+| **SQL Server** | Strong tooling, Windows/.NET integration, good analytics features | Licensing cost | Enterprises on Microsoft stacks |
+| **SQLite** | Embedded, zero-ops, single file | Single writer at a time | Mobile apps, edge, tests, small services |
+| **Distributed SQL** (Spanner, CockroachDB, YugabyteDB, TiDB) | Horizontal scale with transactions and SQL | Higher write latency (consensus), cost | Global apps needing strong consistency |
+
+Managed versions (Amazon RDS/Aurora, Cloud SQL, Azure SQL) take care of backups, failover and patching.
 
 ## Connection pooling
 

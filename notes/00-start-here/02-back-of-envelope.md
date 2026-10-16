@@ -9,6 +9,12 @@ lab: estimator
 
 # Back of the Envelope Estimation
 
+> **TL;DR**
+> - Estimation exists to justify decisions (one box or many, cache or not, CDN or not), not to show arithmetic.
+> - Shortcuts: a day is about 10^5 seconds; 1M requests/day is about 12/s; 1B/day is about 12k/s.
+> - Chain it: DAU, requests/day, average QPS, peak QPS, storage, bandwidth, cache, servers.
+> - Memory is fast, disk seeks are slow, cross-region round trips are slowest; design around that.
+
 Estimation exists to **justify decisions**, not to impress with arithmetic. You want an order of magnitude answer in under 5 minutes that tells you: does this fit on one machine, do we need a cache, do we need sharding, do we need a CDN?
 
 ![Estimation pipeline](../../assets/diagrams/estimation-pipeline.svg)
@@ -16,6 +22,14 @@ Estimation exists to **justify decisions**, not to impress with arithmetic. You 
 > Try it live: the **Capacity Estimator** lab in the interactive site does this chain for you with sliders.
 
 ## Numbers to memorise
+
+### Throughput units: RPS, QPS, TPS
+
+- **RPS (requests per second)**: HTTP or RPC requests hitting a service or load balancer.
+- **QPS (queries per second)**: often used interchangeably with RPS; strictly, queries against a database or search engine. One page request can fan out into many queries.
+- **TPS (transactions per second)**: business or database transactions committed per second (payments, orders). Usually the most expensive unit, because each one involves writes, locks and durable commits.
+
+Always say which one you mean and at which layer: "40k RPS at the edge becomes 120k QPS on the cache and 2k TPS on the database".
 
 ### Powers of two and data sizes
 

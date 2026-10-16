@@ -8,6 +8,12 @@ time: 40 min
 
 # Consensus, Leader Election and Clocks
 
+> **TL;DR**
+> - Consensus (Raft, Paxos) lets a majority of nodes agree on an ordered log despite failures.
+> - Leader election uses leases in a consensus store, with fencing tokens to stop zombie leaders.
+> - Physical clocks drift; logical clocks (Lamport, vector) capture causality; vector clocks detect concurrent writes.
+> - Spanner's TrueTime waits out clock uncertainty to give globally consistent timestamps.
+
 ## Why consensus
 
 Many problems reduce to getting several machines to **agree on a value or an ordered log** despite failures:

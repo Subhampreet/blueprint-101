@@ -8,6 +8,12 @@ time: 40 min
 
 # Design Google Docs / Notion
 
+> **TL;DR**
+> - Concurrent edits must converge: Operational Transformation (server-ordered) or CRDTs (merge anywhere).
+> - One session server owns each document, orders operations, persists them to an op log and broadcasts.
+> - Snapshots plus the op log rebuild any version; history is never rewritten.
+> - Presence and cursors are ephemeral and throttled; permissions are checked on connect and re-checked.
+
 ## 1. Requirements
 
 **Functional**: create and edit rich-text documents; multiple users edit **simultaneously** and see each other's changes and cursors in real time; comments and suggestions; version history and restore; sharing with view/comment/edit permissions; offline editing that syncs later.

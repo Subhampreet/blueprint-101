@@ -8,6 +8,12 @@ time: 20 min
 
 # DNS (Domain Name System)
 
+> **TL;DR**
+> - DNS is the internet's phone book: a resolver walks root, TLD and authoritative servers and caches the answer for its TTL.
+> - Low TTLs mean fast failover but more lookups; high TTLs mean speed and resilience but slow changes.
+> - DNS also routes traffic: weighted, latency-based, geo and health-checked answers; anycast complements it.
+> - Inside data centers, DNS and registries (Consul, Eureka, Kubernetes DNS) handle service discovery.
+
 DNS is the internet's distributed, hierarchical, heavily cached phone book. It maps names (`api.example.com`) to records (IP addresses, aliases, mail servers, text). It is the first hop of almost every request, and a surprisingly powerful traffic management tool.
 
 ## Resolution step by step
@@ -74,9 +80,41 @@ Practical pattern: keep TTL high for stable records; **lower it a day before a p
 - **DNS over HTTPS / TLS (DoH / DoT)** encrypts the client to resolver hop for privacy.
 - Watch for **dangling CNAMEs** (pointing at a deprovisioned cloud resource) which enable subdomain takeover.
 
-## Inside a datacenter: service discovery
+## Advanced DNS
 
-Internally, DNS is also used for service discovery (Kubernetes `my-svc.my-ns.svc.cluster.local`, Consul DNS interface). Short TTLs and client side caching matter a lot here; many systems prefer API based discovery (Envoy xDS, Consul, Eureka) for faster updates. See [Microservices](../05-architecture/01-monolith-vs-microservices.md).
+### Query types
+
+- **Recursive query**: "give me the final answer" (client to resolver).
+- **Iterative query**: "give me the best referral you have" (resolver to root, TLD and authoritative servers).
+- **Record type queries**: A, AAAA, CNAME, MX, TXT, SRV, NS, SOA, CAA, PTR (reverse lookups via `in-addr.arpa`). `ANY` queries are deprecated and often refused.
+- **Negative answers**: NXDOMAIN (name does not exist) and NODATA (name exists, no record of that type), both cached using the SOA minimum TTL.
+
+### Zone transfers
+
+Secondary nameservers copy a zone from the primary: **AXFR** transfers the full zone, **IXFR** only changes since a serial number; **NOTIFY** tells secondaries a new serial exists. Restrict transfers to known secondaries (open AXFR leaks every hostname you have). Managed DNS providers replicate zones internally instead.
+
+### Weighted, latency and failover routing
+
+- **Weighted DNS**: return records in proportion to weights (90/10 canary, gradual migration between providers).
+- **Latency-based**: answer with the region that has the lowest measured latency to the resolver.
+- **Failover**: health-checked primary and secondary records.
+- **GeoDNS**: answer by geography (data residency, local edges).
+
+## Service discovery and naming inside a datacenter
+
+DNS is also how services find each other internally, alongside dedicated discovery systems:
+
+| Mechanism | How it works | Typical use |
+|---|---|---|
+| **Kubernetes DNS** | `my-svc.my-ns.svc.cluster.local` resolves to a Service virtual IP (or pod IPs for headless services) | Default inside Kubernetes |
+| **Consul** | Service registry with health checks; DNS interface (`orders.service.consul`) and HTTP API; KV store | VMs and mixed environments, service mesh |
+| **Eureka** | Netflix's registry: services register and heartbeat, clients cache the registry and load balance themselves | Spring Cloud / JVM microservices |
+| **etcd / ZooKeeper** | Consistent stores where services register ephemeral entries | Infrastructure, coordination |
+| **mDNS (multicast DNS)** | Hosts answer `.local` name queries over multicast on the local network, no DNS server needed | Printers, smart devices, local development |
+| **Zeroconf** (Bonjour/Avahi) | mDNS + DNS-SD (service discovery) + link-local addressing: devices find each other with zero configuration | Home and office networks, IoT |
+| **xDS (Envoy)** | Control plane pushes endpoint lists to proxies via API | Service meshes (Istio) |
+
+Short TTLs and client-side caching matter: DNS-based discovery updates slowly; API-based discovery (Consul, Eureka, xDS) reacts in seconds. See [Microservices](../05-architecture/01-monolith-vs-microservices.md#service-discovery).
 
 ## Interview questions
 

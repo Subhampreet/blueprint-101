@@ -8,6 +8,12 @@ time: 15 min
 
 # Proxies, API Gateway and BFF
 
+> **TL;DR**
+> - A forward proxy acts for clients; a reverse proxy acts for servers (TLS, caching, load balancing).
+> - An API gateway is the single front door: routing, auth, rate limits, aggregation, observability.
+> - Keep business logic out of the gateway; it should stay thin, stateless and redundant.
+> - Backends for Frontends give each client type (web, mobile, partners) its own tailored API layer.
+
 ## Forward vs reverse proxy
 
 ![Forward vs reverse proxy](../../assets/diagrams/forward-vs-reverse-proxy.svg)

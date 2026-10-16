@@ -9,6 +9,11 @@ lab: load-balancer
 
 # Build: Load Balancer Strategies and Simulation
 
+> **TL;DR**
+> - Five balancing strategies plus a queueing simulation with one slow server.
+> - Round robin lets the slow server's queue explode; least connections and power of two choices route around it.
+> - Smooth weighted round robin interleaves picks instead of sending bursts.
+
 Theory: [Load Balancing](../02-building-blocks/02-load-balancing.md).
 
 ## Code

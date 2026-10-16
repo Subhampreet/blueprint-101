@@ -8,6 +8,12 @@ time: 40 min
 
 # Design Patterns
 
+> **TL;DR**
+> - Patterns are a shared vocabulary: name one and you describe a whole design in a sentence.
+> - Most used: Strategy (swap algorithms), Observer (react to events), Factory and Builder (create objects), Decorator and Adapter (wrap and translate), State (lifecycles).
+> - Match patterns to problems: State for vending machines and orders, Command for undo, Strategy for pricing.
+> - Do not force patterns where a simple function works.
+
 A design pattern is a named, reusable solution to a recurring design problem. The value in interviews is the **vocabulary**: saying "I'll use a strategy for pricing and an observer for order events" communicates a whole design in one sentence. Do not force patterns where a plain function would do.
 
 ![Patterns gallery](../../assets/diagrams/design-patterns-gallery.svg)

@@ -9,6 +9,12 @@ lab: availability
 
 # Availability, Reliability and SLOs
 
+> **TL;DR**
+> - Each extra nine costs about 10x more effort: 99.9% allows ~43 minutes of downtime a month, 99.99% ~4 minutes.
+> - Components in series multiply availability (lower); redundant copies in parallel raise it, if their failures are independent.
+> - SLIs measure, SLOs set targets, SLAs are contracts; the error budget decides when to slow down and fix reliability.
+> - Reducing time to recover is usually cheaper than preventing every failure.
+
 - **Availability**: fraction of time (or of requests) the system serves correctly. `uptime / (uptime + downtime)` or `good requests / total requests`.
 - **Reliability**: probability the system works correctly over a period. Related, but a system can be "up" and still return wrong results.
 - **Durability**: probability that stored data is not lost. S3 advertises 11 nines of durability but only 99.99% availability. Different things.

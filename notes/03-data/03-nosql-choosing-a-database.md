@@ -8,6 +8,12 @@ time: 35 min
 
 # NoSQL Families and Choosing a Database
 
+> **TL;DR**
+> - NoSQL families trade the relational model for scale or flexibility: key-value, document, wide-column, graph, time-series, search, vector.
+> - Design NoSQL schemas from access patterns: one partition per query, denormalized, with bounded partitions.
+> - Pick by asking: do I need transactions, what do queries look like, what scale and consistency?
+> - Several stores in one system is normal, but each one adds operational cost and a sync problem.
+
 "NoSQL" is a loose label for databases that relax the relational model (fixed schema, joins, multi-row transactions) to gain something specific: horizontal scale, flexible schema, low latency, or a data model that fits the problem better. There is no "NoSQL vs SQL" winner. There is **the right store for an access pattern**.
 
 ## The families

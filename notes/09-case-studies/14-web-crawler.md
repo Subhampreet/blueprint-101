@@ -8,6 +8,12 @@ time: 35 min
 
 # Design a Web Crawler
 
+> **TL;DR**
+> - The URL frontier balances priority (important pages first) with politeness (one host at a time, with delays).
+> - Bloom filters answer "seen this URL?" cheaply; SimHash finds near-duplicate pages.
+> - Normalize URLs, respect robots.txt, cache DNS, and defend against spider traps.
+> - Recrawl pages according to how often they change.
+
 ## 1. Requirements
 
 **Functional**: given seed URLs, download web pages, extract links, and keep crawling; store page content for indexing; recrawl pages based on how often they change.

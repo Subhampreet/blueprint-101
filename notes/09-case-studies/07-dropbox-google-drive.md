@@ -8,6 +8,12 @@ time: 35 min
 
 # Design Dropbox / Google Drive
 
+> **TL;DR**
+> - Split files into content-hashed blocks: upload only changed blocks and dedupe identical ones.
+> - Keep metadata (file to block list, versions) in a consistent database and blocks in object storage.
+> - Clients sync from a per-namespace change journal using a cursor, woken by long polling.
+> - Concurrent offline edits produce conflicted copies; versions make restores a metadata operation.
+
 ## 1. Requirements
 
 **Functional**: upload/download files, automatic sync across devices, file versioning and restore, sharing with permissions (view/edit), offline edits that sync later, web access.

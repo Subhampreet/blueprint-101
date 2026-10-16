@@ -9,6 +9,12 @@ lab: cache
 
 # Caching
 
+> **TL;DR**
+> - A cache keeps the result of expensive work close by so the next request skips it; it is the biggest lever for read latency.
+> - Default pattern: cache-aside (read cache, fall back to DB, populate); on writes, update the DB then delete the key.
+> - Bound staleness with TTLs plus invalidation; protect the DB from stampedes with single-flight and jittered TTLs.
+> - Measure hit ratio; a cache that rarely hits only adds latency.
+
 A cache stores the result of expensive work (a DB query, a computation, a remote call, a rendered page) in faster storage so the next request can skip that work. Caching is the single highest leverage tool for read latency and for protecting databases, and also the most common source of subtle bugs.
 
 > "There are only two hard things in Computer Science: cache invalidation and naming things." (Phil Karlton)
@@ -101,6 +107,26 @@ Cache-aside with delete on write can still serve stale data:
 3. Reader (slow) now `SET`s the **old** value into cache. Stale until TTL.
 
 Mitigations: keep a TTL as a safety net; **delayed double delete** (delete again a few hundred ms after the write); use `SET` only if version is newer (store a version or timestamp and compare with a Lua script); or invalidate from the DB change stream, which is ordered.
+
+## Cache coherence
+
+When the same data is cached in several places (a local cache in each of 50 app instances, plus Redis, plus the CDN), copies can disagree. **Cache coherence** is keeping those copies consistent enough.
+
+- **Short TTLs on local caches** (seconds) bound how stale any instance can be.
+- **Invalidation broadcast**: publish "key X changed" on a pub/sub channel; every instance drops its local copy.
+- **Version stamps**: store a version with the value and compare against a cheap version lookup before trusting a local copy.
+- **Single source of cached truth**: for data that must agree everywhere, skip local caches and use only the shared cache.
+
+CPU caches face the same problem in hardware (MESI protocol); distributed caches solve it with TTLs and invalidation messages instead.
+
+## Cache busting
+
+Cache busting forces clients and CDNs to fetch a new version of something that was cached with a long TTL.
+
+- **Content-hashed filenames** (`app.3f9a2c.js`): the build changes the name whenever the content changes; old and new can be cached forever. The best approach for static assets.
+- **Version or query parameters** (`/logo.png?v=42`): simple, but some caches ignore query strings; prefer path versioning.
+- **Purge APIs** at the CDN for content that cannot be renamed (HTML pages, API responses), ideally by surrogate key or tag.
+- **Short TTL on the entry point** (the HTML that references hashed assets) so new deployments are picked up quickly.
 
 ## Cache stampede (thundering herd / dogpile)
 

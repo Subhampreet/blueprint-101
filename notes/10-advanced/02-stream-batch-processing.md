@@ -8,6 +8,12 @@ time: 35 min
 
 # Big Data, Batch and Stream Processing
 
+> **TL;DR**
+> - Batch processes bounded data on a schedule (Spark); streaming processes unbounded events continuously (Flink, Kafka Streams).
+> - Streaming relies on event time, windows, watermarks and checkpointed state for exactly-once results.
+> - Lambda runs batch and speed layers side by side; Kappa uses one streaming pipeline and replays the log.
+> - Orchestrators (Airflow, Dagster) and dbt keep batch pipelines reliable and testable.
+
 - **Batch**: process a bounded dataset (yesterday's logs) all at once. High throughput, latency of minutes to hours.
 - **Stream**: process an unbounded sequence of events continuously. Low latency (ms to seconds), more complex state and correctness handling.
 

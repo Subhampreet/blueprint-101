@@ -9,6 +9,11 @@ lab: rate-limiter
 
 # Build: Rate Limiters
 
+> **TL;DR**
+> - Four limiters in a few lines each, with an injected clock for deterministic tests.
+> - The tests demonstrate the fixed-window edge burst that sliding windows avoid.
+> - In production the same logic runs atomically in Redis, keyed per client.
+
 Four algorithms from [Rate Limiting](../02-building-blocks/08-rate-limiting.md), each a few lines. The clock is injected so tests are deterministic (a good habit for any time-based code).
 
 ## Code

@@ -8,6 +8,12 @@ time: 30 min
 
 # Observability
 
+> **TL;DR**
+> - Metrics tell you something is wrong, traces tell you where, logs tell you why; correlate them with a trace id.
+> - Measure the golden signals: latency, traffic, errors, saturation (RED for services, USE for resources).
+> - Alert on user-facing symptoms and SLO burn rates, not on every CPU spike.
+> - In incidents, mitigate first (rollback, flag, failover) and find root causes afterwards in a blameless postmortem.
+
 **Monitoring** tells you *whether* the system is working (known failure modes, dashboards, alerts). **Observability** is the ability to ask *why* it is not working, including questions you did not anticipate, from the telemetry the system emits.
 
 ![Observability pipeline](../../assets/diagrams/observability-pipeline.svg)

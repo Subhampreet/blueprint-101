@@ -9,6 +9,12 @@ lab: cache
 
 # Design a Distributed Cache
 
+> **TL;DR**
+> - A single node is a hash map with eviction (LRU/LFU) and TTLs; the distributed design adds partitioning and replication.
+> - Route keys with consistent hashing or hash slots, via smart clients or a proxy.
+> - Replicas give failover; async replication can lose a little data, which is acceptable for a cache.
+> - Handle hot keys, big values, stampedes and cold starts explicitly.
+
 ## 1. Requirements
 
 **Functional**: `get(key)`, `set(key, value, ttl)`, `delete(key)`; values up to ~1 MB; eviction when full; TTL expiry. Optionally counters, data structures, pub/sub.

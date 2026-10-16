@@ -9,6 +9,12 @@ lab: hash-ring
 
 # Consistent Hashing
 
+> **TL;DR**
+> - With hash(key) % N, changing N moves almost every key; consistent hashing moves only about 1/N of them.
+> - Keys and nodes share a ring; each key belongs to the next node clockwise.
+> - Virtual nodes even out the load and spread a failed node's keys across all survivors.
+> - It balances keys, not load: hot keys still need special handling.
+
 ## The problem with `hash(key) % N`
 
 Simple modulo hashing spreads keys evenly across N servers. But when N changes (a node dies or you add one) almost **every key maps to a different server**:
